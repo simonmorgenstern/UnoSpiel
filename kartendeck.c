@@ -114,15 +114,21 @@ Karte Kartendeck[108] = {
 	{97, aufDemStapel, richtungswechsel, 10, gruen},	
 	{98, aufDemStapel, richtungswechsel, 10, gelb},
 	{99, aufDemStapel, richtungswechsel, 10, gelb},	
-	{100, aufDemStapel, plus4, 10, schwarz},
-	{101, aufDemStapel, plus4, 10, schwarz},
-	{102, aufDemStapel, plus4, 10, schwarz},
-	{103, aufDemStapel, plus4, 10, schwarz},	
-	{104, aufDemStapel, plus2, 10, schwarz},
-	{105, aufDemStapel, plus2, 10, schwarz},
-	{106, aufDemStapel, plus2, 10, schwarz},
-	{107, aufDemStapel, plus2, 10, schwarz}
+	{100, aufDemStapel, farbwunsch, 10, schwarz},
+	{101, aufDemStapel, farbwunsch, 10, schwarz},
+	{102, aufDemStapel, farbwunsch, 10, schwarz},
+	{103, aufDemStapel, farbwunsch, 10, schwarz},	
+	{104, aufDemStapel, farbwunsch, 10, schwarz},
+	{105, aufDemStapel, farbwunsch, 10, schwarz},
+	{106, aufDemStapel, farbwunsch, 10, schwarz},
+	{107, aufDemStapel, farbwunsch, 10, schwarz}
 };	
 
-struct 
+
+
+
+
+
+
+
 	
