@@ -1,4 +1,10 @@
 // SM
+enum k_status{ inDerHand, aufDemStapel, abgelegt };
+enum k_typ{ zahl, plus2, plus4, aussetzen, richtungswechsel, farbwunsch };
+enum k_farbe{ blau, rot, gruen, gelb, schwarz };
+
+void mische_karten();
+
 typedef struct{
 	int index; 
 	int status;
@@ -7,6 +13,8 @@ typedef struct{
 	int farbe;
 } Karte;
 
-Karte Kartendeck[108];
+extern Karte Kartenstapel[108];
+
+
 
 

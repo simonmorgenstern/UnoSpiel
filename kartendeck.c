@@ -4,13 +4,20 @@ enum k_status{ inDerHand, aufDemStapel, abgelegt };
 enum k_typ{ zahl, plus2, plus4, aussetzen, richtungswechsel, farbwunsch };
 enum k_farbe{ blau, rot, gruen, gelb, schwarz };
 
-typedef struct{
+void kopiere_karten();
+void mische_karten();
+void zeige_kartenstapel();
+void aendere_kartenstatus(int index, int neuerStatus);
+
+typedef struct {
 	int index; 
 	int status;
 	int typ;
 	int nummer;
 	int farbe;
 } Karte;
+
+Karte Kartenstapel[108];
 
 // SM
 Karte Kartendeck[108] = {
@@ -123,6 +130,35 @@ Karte Kartendeck[108] = {
 	{106, aufDemStapel, farbwunsch, 10, schwarz},
 	{107, aufDemStapel, farbwunsch, 10, schwarz}
 };	
+
+void mische_karten() {
+	kopiere_karten();
+	size_t i;
+    for (i = 0; i < 108 - 1; i++) {
+        size_t j = i + rand() / (RAND_MAX / (108 - i) + 1);
+        Karte k = Kartenstapel[j];
+        Kartenstapel[j] = Kartenstapel[i];
+        Kartenstapel[i] = k;
+    }
+    // zeige_kartenstapel(); method for testing
+}
+
+// SM 
+void kopiere_karten() {
+	for(int i = 0; i < 108; i++){
+		Kartenstapel[i] = Kartendeck[i];	
+	}
+}
+
+// SM | Testmethode 
+
+void zeige_kartenstapel() {
+	for(int i = 0; i < 108; i++){
+		printf("%d -", Kartenstapel[i].index);
+	}
+}
+
+
 
 
 
