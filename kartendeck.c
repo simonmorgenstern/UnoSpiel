@@ -7,7 +7,6 @@ enum k_farbe{ blau, rot, gruen, gelb, schwarz };
 void kopiere_karten();
 void mische_karten();
 void zeige_kartenstapel();
-void aendere_kartenstatus(int index, int neuerStatus);
 
 typedef struct {
 	int index; 
@@ -157,7 +156,6 @@ void zeige_kartenstapel() {
 		printf("%d -", Kartenstapel[i].index);
 	}
 }
-
 
 
 
