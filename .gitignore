@@ -2,3 +2,9 @@
 .idea/
 cmake-build-debug/
 CMakeLists.txt
+
+#SL
+Menue
+Menue.o
+kartendeck.o
+main.o
