@@ -17,7 +17,7 @@ int programmstart(){
 		while(getchar() != '\n');
 		switch(spielstart){
 			case 'y':
-				//printf("Super, dann los =)\n");
+				//printf("Super, dann los =)\n"); wird nicht mehr benötigt
 				menue();
 				break;
 			case 'n':
