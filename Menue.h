@@ -1,3 +1,5 @@
+
+
 void fehlermeldung();
 void menue();
 void regeln_einlesen();
