@@ -1,0 +1,8 @@
+Sobald man an der Reihe ist, darf man immer nur passende
+Karten mit derselben Farbe oder derselben Zahl gespielt werden.
+Ausnahme bilden Plus4- und Farbwunschkarten, diese dürfen auf
+jede Karte gelegt. Plus2-Karten sind stapelbar und die Anzahl
+der zu ziehenden Karten erhöht sich immer um +2. Das Gleiche 
+gilt für Plus4-Karten. Wenn man vom Stapel abheben musste ist
+der Zug beendet und der nächste Spieler ist am Zug. Ziel ist,
+als erster keine Karten mehr auf der Hand zu haben.
