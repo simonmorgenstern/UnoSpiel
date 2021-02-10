@@ -8,7 +8,7 @@ void regeln_einlesen();
 void spiel();
 void spielkommandos();
 //SL
-int main(){
+int programmstart(){
 	char spielstart;
 	printf("Hallo, willst du UNO spielen?\n");
 	printf("Bestaetige mit y oder verneine mit n\n");
@@ -45,7 +45,6 @@ void menue(){
 	do {
 		menuepunkt = getchar();
 		while(getchar() != '\n');			//lehrt Tastaturpuffer
-		//scanf("%d", &menuepunkt);
 		switch (menuepunkt){
 			case '1':
 				printf("Der Gamemaster mischt die Karten, einen Moment.\n");
