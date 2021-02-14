@@ -17,6 +17,8 @@ void zeige_handkarten_spieler();
 
 void ziehe_karten(int wer, int anzahl);
 
+void entferne_karte(int wer, int index);
+
 Karte *p_handkarten_spieler;
 Karte *p_handkarten_bot1;
 Karte *p_handkarten_bot2;
@@ -76,12 +78,14 @@ void teile_karten_aus() {
 
 // SM
 void zeige_handkarten_spieler() {
+    printf("\n Spielerkarten: \n");
     for (int i = 0; i < anzahl_karten_spieler; i++) {
         Karte k = p_handkarten_spieler[i];
         printf("%d -", k.index);
     }
 }
 
+// SM
 void ziehe_karten(int wer, int anzahl) {
     switch (wer) {
         case spieler:
@@ -93,7 +97,7 @@ void ziehe_karten(int wer, int anzahl) {
                 oberste_stapel_karte++;
             }
             anzahl_karten_spieler += anzahl;
-            zeige_handkarten_spieler();
+//            zeige_handkarten_spieler();
             break;
         case bot1:
             printf("Bot1 zieht %d Karten \n", anzahl);
@@ -124,6 +128,40 @@ void ziehe_karten(int wer, int anzahl) {
             anzahl_karten_bot3 += anzahl;
         default:
             printf("Es gab ein Fehler beim Ziehen der Karten");
+            break;
+    }
+}
+
+void entferne_karte(int wer, int index) {
+    switch (wer) {
+        case spieler:
+            for (int i = index; i < anzahl_karten_spieler - 1; i++) {
+                p_handkarten_spieler[i] = p_handkarten_spieler[i + 1];
+            }
+            p_handkarten_spieler = realloc(p_handkarten_spieler, (anzahl_karten_spieler - 1) * sizeof(Karte));
+            anzahl_karten_spieler--;
+            zeige_handkarten_spieler();
+            break;
+        case bot1:
+            for (int i = index; i < anzahl_karten_bot1 - 1; i++) {
+                p_handkarten_bot1[i] = p_handkarten_bot1[i + 1];
+            }
+            p_handkarten_bot1 = realloc(p_handkarten_bot1, (anzahl_karten_bot1 - 1) * sizeof(Karte));
+            anzahl_karten_bot1--;
+        case bot2:
+            for (int i = index; i < anzahl_karten_bot2 - 1; i++) {
+                p_handkarten_bot2[i] = p_handkarten_bot2[i + 1];
+            }
+            p_handkarten_bot2 = realloc(p_handkarten_bot2, (anzahl_karten_bot2 - 1) * sizeof(Karte));
+            anzahl_karten_bot2--;
+        case bot3:
+            for (int i = index; i < anzahl_karten_bot3 - 1; i++) {
+                p_handkarten_bot3[i] = p_handkarten_bot3[i + 1];
+            }
+            p_handkarten_bot3 = realloc(p_handkarten_bot3, (anzahl_karten_bot3 - 1) * sizeof(Karte));
+            anzahl_karten_bot3--;
+        default:
+            printf("Die Karte konnte nicht entfernt werden");
             break;
     }
 }
