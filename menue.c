@@ -3,39 +3,39 @@
 #include <ctype.h>
 
 void fehlermeldung();
-void menue();
+int menue();
 void regeln_einlesen();
-void spiel();
 void spielkommandos();
 //SL
-int main(){
-	char spielstart;
-	printf("Hallo, willst du UNO spielen?\n");
-	printf("Bestaetige mit y oder verneine mit n\n");
-	do{
-		spielstart = getchar();
-		while(getchar() != '\n');
-		switch(spielstart){
-			case 'y':
-				//printf("Super, dann los =)\n");
-				menue();
-				break;
-			case 'n':
-				printf("Oh, schade, bis bald. =)\n");
-				return 0;
-				break;
-			default:
-				fehlermeldung();
-				break;
-		}
-	} while (1);
-}
+int spielstart();
 //SL
 void fehlermeldung(){
 	printf("Es tut mir Leid ich habe dich nicht verstanden :-/\nBitte Eingabe wiederholen.\n");
 }
+// SL
+int spielstart() {
+    char spielstart;
+    printf("Hallo, willst du UNO spielen?\n");
+    printf("Bestaetige mit y oder verneine mit n\n");
+    do{
+        spielstart = getchar();
+        while(getchar() != '\n');
+        switch(spielstart){
+            case 'y':
+                //printf("Super, dann los =)\n");
+                return menue();
+            case 'n':
+                printf("Oh, schade, bis bald. =)\n");
+                return 0;
+                break;
+            default:
+                fehlermeldung();
+                break;
+        }
+    } while (1);
+}
 //SL
-void menue(){
+int menue(){
 	int menuepunkt = 0;
 	printf("------Menue------\n");
 	printf("1. Spiel starten\n");
@@ -49,8 +49,7 @@ void menue(){
 		switch (menuepunkt){
 			case '1':
 				printf("Der Gamemaster mischt die Karten, einen Moment.\n");
-				spiel();
-				break;
+				return 1;
 			case '2':
 				regeln_einlesen();
 				printf("\n\nZum Menue mit Enter\n\n");
@@ -65,7 +64,7 @@ void menue(){
 				break;
 			case '4':
 				printf("Oh, schade, bis bald. =)\n");
-				break;
+				return 0;
 			default:
 				fehlermeldung();
 				break;
@@ -78,7 +77,7 @@ void regeln_einlesen(){
 	char *fname = "Regeln.txt";
 	char output;
 	if ((fp = fopen(fname, "r"))== NULL){
-		fprintf(stderr, "Fehler beim Oeffnen, bitte Spiel neu starten\n");
+		fprintf(stderr, "Fehler beim Oeffnen\n");
 	}
 	else{
 		printf("Regeln:\n");
@@ -89,16 +88,12 @@ void regeln_einlesen(){
 	fclose(fp);
 }
 //SL
-void spiel(){
-	printf("Hier startet spaeter das Spiel\n");
-}
-//SL
 void spielkommandos(){
 	FILE *fp;
 	char *fname = "Spielkommandos.txt";
 	char output;
 	if ((fp = fopen(fname, "r"))== NULL){
-		fprintf(stderr, "Fehler beim Oeffnen, bitte Spiel neu starten\n");
+		fprintf(stderr, "Fehler beim Oeffnen\n");
 	}
 	else{
 		printf("Spielkommandos:\n\n");

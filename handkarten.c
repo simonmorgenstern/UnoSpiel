@@ -62,6 +62,7 @@ void teile_karten_aus() {
                     break;
             }
             Kartenstapel[index].status = inDerHand;
+            oberste_stapel_karte = index + 1;
         }
     }
 }
