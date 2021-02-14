@@ -1,12 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "kartendeck.h"
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-// mische_karten() um den Kartenstapel zu mischen
+#include "handkarten.h"
 
-int main(int argc, char *argv[]) {
-	return 0;
+int main() {
+    mische_karten();
+    hole_handkarten_speicher();
+    teile_karten_aus();
+    zeige_handkarten_spieler();
+    return 0;
 }
-
-
-
