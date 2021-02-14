@@ -138,8 +138,10 @@ void mische_karten() {
         Karte k = Kartenstapel[j];
         Kartenstapel[j] = Kartenstapel[i];
         Kartenstapel[i] = k;
+        Kartenstapel[i].index = i;
+        Kartenstapel[j].index = j;
     }
-    // zeige_kartenstapel(); method for testing
+     zeige_kartenstapel(); // method for testing
 }
 
 // SM 
