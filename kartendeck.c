@@ -17,7 +17,7 @@ typedef struct {
 } Karte;
 
 Karte Kartenstapel[108];
-
+int oberste_stapel_karte;
 // SM
 Karte Kartendeck[108] = {
 	{0, aufDemStapel, zahl, 0, blau},
