@@ -10,7 +10,7 @@ typedef struct{
 } Karte;
 
 extern Karte Kartenstapel[108];
-
+extern int oberste_stapel_karte;
 
 
 

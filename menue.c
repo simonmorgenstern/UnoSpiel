@@ -8,6 +8,7 @@ void regeln_einlesen();
 void spiel();
 void spielkommandos();
 //SL
+
 int programmstart(){
 	char spielstart;
 	printf("Hallo, willst du UNO spielen?\n");
@@ -17,7 +18,6 @@ int programmstart(){
 		while(getchar() != '\n');
 		switch(spielstart){
 			case 'y':
-				//printf("Super, dann los =)\n"); wird nicht mehr benötigt
 				menue();
 				break;
 			case 'n':
