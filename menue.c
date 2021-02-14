@@ -104,5 +104,3 @@ void spielkommandos(){
 	fclose(fp);
 }
 
-
-
