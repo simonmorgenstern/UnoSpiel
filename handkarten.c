@@ -2,13 +2,22 @@
 #include "kartendeck.h"
 #include "stdlib.h"
 
-enum k_status{ inDerHand, aufDemStapel, abgelegt };
+enum k_status {
+    inDerHand, aufDemStapel, abgelegt
+};
+enum {
+    spieler, bot1, bot2, bot3
+};
 
 void hole_handkarten_speicher();
 
 void teile_karten_aus();
 
 void zeige_handkarten_spieler();
+
+void ziehe_karten(int wer, int anzahl);
+
+void entferne_karte(int wer, int index);
 
 Karte *p_handkarten_spieler;
 Karte *p_handkarten_bot1;
@@ -38,41 +47,126 @@ void hole_handkarten_speicher() {
         printf("Speicheranforderung fehlgeschlagen");
     }
 }
+
 // SM
 void teile_karten_aus() {
     for (int karte = 0; karte < 7; karte++) {
-        for (int spieler = 0; spieler < 4; spieler++) {
-            int index = karte * 4 + spieler;
-            switch (spieler) {
-                case 0:
-                    p_handkarten_spieler[karte] = Kartenstapel[index];
+        for (int spieler_counter = 0; spieler_counter < 4; spieler_counter++) {
+            switch (spieler_counter) {
+                case spieler:
+                    p_handkarten_spieler[karte] = Kartenstapel[oberste_stapel_karte];
                     anzahl_karten_spieler++;
                     break;
-                case 1:
-                    p_handkarten_bot1[karte] = Kartenstapel[index];
+                case bot1:
+                    p_handkarten_bot1[karte] = Kartenstapel[oberste_stapel_karte];
                     anzahl_karten_bot1++;
                     break;
-                case 2:
-                    p_handkarten_bot2[karte] = Kartenstapel[index];
+                case bot2:
+                    p_handkarten_bot2[karte] = Kartenstapel[oberste_stapel_karte];
                     anzahl_karten_bot2++;
                     break;
-                case 3:
-                    p_handkarten_bot3[karte] = Kartenstapel[index];
+                case bot3:
+                    p_handkarten_bot3[karte] = Kartenstapel[oberste_stapel_karte];
                     anzahl_karten_bot3++;
                     break;
             }
-            Kartenstapel[index].status = inDerHand;
-            oberste_stapel_karte = index + 1;
+            Kartenstapel[oberste_stapel_karte].status = inDerHand;
+            oberste_stapel_karte++;
         }
     }
 }
+
 // SM
 void zeige_handkarten_spieler() {
-    for(int i = 0; i < 7; i++){
+    printf("\n Spielerkarten: \n");
+    for (int i = 0; i < anzahl_karten_spieler; i++) {
         Karte k = p_handkarten_spieler[i];
         printf("%d -", k.index);
     }
 }
+
+// SM
+void ziehe_karten(int wer, int anzahl) {
+    switch (wer) {
+        case spieler:
+            printf("Spieler zieht %d Karten \n", anzahl);
+            p_handkarten_spieler = realloc(p_handkarten_spieler, (anzahl_karten_spieler + anzahl) * sizeof(Karte));
+            for (int i = 0; i < anzahl; i++) {
+                p_handkarten_spieler[anzahl_karten_spieler + i] = Kartenstapel[oberste_stapel_karte];
+                Kartenstapel[oberste_stapel_karte].status = inDerHand;
+                oberste_stapel_karte++;
+            }
+            anzahl_karten_spieler += anzahl;
+//            zeige_handkarten_spieler();
+            break;
+        case bot1:
+            printf("Bot1 zieht %d Karten \n", anzahl);
+            p_handkarten_bot1 = realloc(p_handkarten_bot1, (anzahl_karten_bot1 + anzahl) * sizeof(Karte));
+            for (int i = 0; i < anzahl; i++) {
+                p_handkarten_bot1[anzahl_karten_bot1 + i] = Kartenstapel[oberste_stapel_karte];
+                Kartenstapel[oberste_stapel_karte].status = inDerHand;
+                oberste_stapel_karte++;
+            }
+            anzahl_karten_bot1 += anzahl;
+        case bot2:
+            printf("Bot2 zieht %d Karten \n", anzahl);
+            p_handkarten_bot2 = realloc(p_handkarten_bot2, (anzahl_karten_bot2 + anzahl) * sizeof(Karte));
+            for (int i = 0; i < anzahl; i++) {
+                p_handkarten_bot2[anzahl_karten_bot2 + i] = Kartenstapel[oberste_stapel_karte];
+                Kartenstapel[oberste_stapel_karte].status = inDerHand;
+                oberste_stapel_karte++;
+            }
+            anzahl_karten_bot2 += anzahl;
+        case bot3:
+            printf("Bot3 zieht %d Karten \n", anzahl);
+            p_handkarten_bot3 = realloc(p_handkarten_bot1, (anzahl_karten_bot3 + anzahl) * sizeof(Karte));
+            for (int i = 0; i < anzahl; i++) {
+                p_handkarten_bot3[anzahl_karten_bot3 + i] = Kartenstapel[oberste_stapel_karte];
+                Kartenstapel[oberste_stapel_karte].status = inDerHand;
+                oberste_stapel_karte++;
+            }
+            anzahl_karten_bot3 += anzahl;
+        default:
+            printf("Es gab ein Fehler beim Ziehen der Karten");
+            break;
+    }
+}
+
+void entferne_karte(int wer, int index) {
+    switch (wer) {
+        case spieler:
+            for (int i = index; i < anzahl_karten_spieler - 1; i++) {
+                p_handkarten_spieler[i] = p_handkarten_spieler[i + 1];
+            }
+            p_handkarten_spieler = realloc(p_handkarten_spieler, (anzahl_karten_spieler - 1) * sizeof(Karte));
+            anzahl_karten_spieler--;
+            zeige_handkarten_spieler();
+            break;
+        case bot1:
+            for (int i = index; i < anzahl_karten_bot1 - 1; i++) {
+                p_handkarten_bot1[i] = p_handkarten_bot1[i + 1];
+            }
+            p_handkarten_bot1 = realloc(p_handkarten_bot1, (anzahl_karten_bot1 - 1) * sizeof(Karte));
+            anzahl_karten_bot1--;
+        case bot2:
+            for (int i = index; i < anzahl_karten_bot2 - 1; i++) {
+                p_handkarten_bot2[i] = p_handkarten_bot2[i + 1];
+            }
+            p_handkarten_bot2 = realloc(p_handkarten_bot2, (anzahl_karten_bot2 - 1) * sizeof(Karte));
+            anzahl_karten_bot2--;
+        case bot3:
+            for (int i = index; i < anzahl_karten_bot3 - 1; i++) {
+                p_handkarten_bot3[i] = p_handkarten_bot3[i + 1];
+            }
+            p_handkarten_bot3 = realloc(p_handkarten_bot3, (anzahl_karten_bot3 - 1) * sizeof(Karte));
+            anzahl_karten_bot3--;
+        default:
+            printf("Die Karte konnte nicht entfernt werden");
+            break;
+    }
+}
+
+
 
 
 

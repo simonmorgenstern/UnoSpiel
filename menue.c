@@ -22,7 +22,6 @@ int spielstart() {
         while(getchar() != '\n');
         switch(spielstart){
             case 'y':
-                //printf("Super, dann los =)\n");
                 return menue();
             case 'n':
                 printf("Oh, schade, bis bald. =)\n");
