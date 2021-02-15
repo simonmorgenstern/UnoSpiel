@@ -11,7 +11,7 @@ void zeige_handkarten_spieler();
 void ziehe_karten(int wer, int anzahl);
 void entferne_karte(int wer, int index);
 void spielroutine_bot(int wer);
-void mögliche_karten(Karte *p_handkarten, int karten_anzahl, int *p_moegliche_karten);
+void moegliche_karten(Karte *p_handkarten, int karten_anzahl, int *p_moegliche_karten);
 int pruefe_karte(Karte pruef_karte);
 
 Karte *p_handkarten_spieler;

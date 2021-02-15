@@ -156,7 +156,7 @@ void spielroutine_bot(int wer) {
     // Ausgabe der Kartenzahl für den Spieler
 }
 
-void mögliche_karten(Karte *p_handkarten, int karten_anzahl, int *p_moegliche_karten) {
+void moegliche_karten(Karte *p_handkarten, int karten_anzahl, int *p_moegliche_karten) {
     for (int i = 0; i < karten_anzahl; i++) {
         // pruefe ob Karte moeglich ist
         // falls ja fuege index der Karte zum array p_moegliche_karten hinzu
