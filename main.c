@@ -8,7 +8,6 @@
 void init_spiel();
 void spiel_schleife();
 
-enum {spieler, bot1, bot2, bot3};
 enum richtung{links, rechts};
 enum {start, spiel, spielende};
 
@@ -16,7 +15,6 @@ enum {start, spiel, spielende};
 
 int spiel_richtung = rechts;
 int zieh_counter = 0;
-int wunschfarbe;
 int spieler_reihenfolge[4] = {spieler, bot1, bot2, bot3};
 int aktueller_spieler = spieler;
 int spielstatus = start;
