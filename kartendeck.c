@@ -116,6 +116,7 @@ void mische_karten() {
 	kopiere_karten();
 	size_t i;
     for (i = 0; i < 108 - 1; i++) {
+        srand(time(NULL));
         size_t j = i + rand() / (RAND_MAX / (108 - i) + 1);
         Karte k = Kartenstapel[j];
         Kartenstapel[j] = Kartenstapel[i];
@@ -123,7 +124,7 @@ void mische_karten() {
         Kartenstapel[i].index = i;
         Kartenstapel[j].index = j;
     }
-    // zeige_kartenstapel(); // method for testing
+     zeige_kartenstapel(); // method for testing
 }
 
 // SM 
@@ -143,7 +144,8 @@ void decke_auf() {
 // SM | Testmethode
 void zeige_kartenstapel() {
 	for(int i = 0; i < 108; i++){
-		printf("%d -", Kartenstapel[i].index);
+	    Karte k = Kartenstapel[i];
+        printf("Stapelkarte %d -> Typ: %d, Farbe: %d, Nummer: %d\n \n",i, k.typ, k.farbe, k.nummer);
 	}
 }
 

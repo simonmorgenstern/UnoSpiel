@@ -2,7 +2,9 @@
 #define karten_deck_never_used
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "main.h"
+
 // SM
 void mische_karten();
 void decke_auf();
