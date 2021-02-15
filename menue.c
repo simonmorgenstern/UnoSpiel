@@ -1,26 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
+#include "menue.h"
 
-void fehlermeldung();
-int menue();
-void regeln_einlesen();
-void spielkommandos();
-//SL
-int spielstart();
 //SL
 void fehlermeldung(){
 	printf("Es tut mir Leid ich habe dich nicht verstanden :-/\nBitte Eingabe wiederholen.\n");
 }
 // SL
 int spielstart() {
-    char spielstart;
+    char spiel_start;
     printf("Hallo, willst du UNO spielen?\n");
     printf("Bestaetige mit y oder verneine mit n\n");
     do{
-        spielstart = getchar();
+        spiel_start = getchar();
         while(getchar() != '\n');
-        switch(spielstart){
+        switch(spiel_start){
             case 'y':
                 //printf("Super, dann los =)\n");
                 return menue();

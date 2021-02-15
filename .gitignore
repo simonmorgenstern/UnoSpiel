@@ -4,6 +4,7 @@ cmake-build-debug/
 CMakeLists.txt
 
 #SL
-Menue.o
-kartendeck.o
-main.o
+*.o
+
+
+

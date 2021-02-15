@@ -1,9 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "Menue.h"
+#include "ende.h"
+
 //SL
-int main(){
+int spiel_ende_benachrichtigung(){
 	char spiel_fortsetzen;
 	int bot = 1;				//Variable wer gewonnen hat, kann/muss noch angepasst werden
 	if (bot == 1){
@@ -34,7 +32,7 @@ int main(){
 	while(getchar() != '\n');
 	switch(spiel_fortsetzen){
 		case 'y':
-			spiel();
+			return 1;					//korrigiert, war spiel()
 			break;
 		case 'n':
 			printf("Schade, bis zum naechsten Mal.\n");
