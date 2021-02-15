@@ -133,13 +133,20 @@ void kopiere_karten() {
 	}
 }
 
-// SM | Testmethode 
+// SM
+void decke_auf() {
+    letzte_karte = Kartenstapel[oberste_stapel_karte];
+    Kartenstapel[oberste_stapel_karte].status = abgelegt;
+    oberste_stapel_karte++;
+}
 
+// SM | Testmethode
 void zeige_kartenstapel() {
 	for(int i = 0; i < 108; i++){
 		printf("%d -", Kartenstapel[i].index);
 	}
 }
+
 
 
 

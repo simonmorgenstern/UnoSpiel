@@ -15,3 +15,5 @@ Karte *p_handkarten_bot2;
 Karte *p_handkarten_bot3;
 
 #endif
+void ziehe_karten(int wer, int anzahl);
+void entferne_karte(int wer, int index);

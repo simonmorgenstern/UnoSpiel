@@ -13,7 +13,7 @@ enum richtung{links, rechts};
 enum {start, spiel, spielende};
 
 // Statusvariablen Spiel
-Karte letzteKarte;
+
 int spiel_richtung = rechts;
 int zieh_counter = 0;
 int wunschfarbe;
@@ -29,13 +29,12 @@ int main() {
 		}
 		while (spiel_ende_benachrichtigung() == 1);
     }
+
     return 0;
 }
 
 void spiel_schleife(){
-    letzteKarte = Kartenstapel[oberste_stapel_karte];
-    oberste_stapel_karte++;
-    printf("%d\n", oberste_stapel_karte);
+    decke_auf();
     spielstatus = spiel;
     while(spielstatus == spiel){
         break;
