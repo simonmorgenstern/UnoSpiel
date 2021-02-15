@@ -144,6 +144,59 @@ void entferne_karte(int wer, int index) {
     }
 }
 
+void spielroutine_bot(int wer) {
+    switch (wer) {
+        bot1:
+            break;
+        bot2:
+            break;
+        bot3:
+            break;
+    }
+    // Ausgabe der Kartenzahl für den Spieler
+}
+
+void mögliche_karten(Karte *p_handkarten, int karten_anzahl, int *p_moegliche_karten) {
+    for (int i = 0; i < karten_anzahl; i++) {
+        // pruefe ob Karte moeglich ist
+        // falls ja fuege index der Karte zum array p_moegliche_karten hinzu
+    }
+}
+
+int pruefe_karte(Karte pruef_karte) {
+    switch (letzte_karte.typ) {
+        case zahl:
+            if(letzte_karte.farbe == pruef_karte.farbe || letzte_karte.nummer == pruef_karte.nummer) {
+                return 1;
+            }
+            return 0;
+        case plus2:
+            if(pruef_karte.typ == plus2) {
+                return 1;
+            }
+            return 0;
+        case plus4:
+            return 1;
+        case aussetzen:
+            if(pruef_karte.typ == aussetzen || letzte_karte.farbe == pruef_karte.farbe){
+                return 1;
+            }
+            return 0;
+        case richtungswechsel:
+            if(pruef_karte.typ == richtungswechsel || letzte_karte.farbe == pruef_karte.farbe) {
+                return 1;
+            }
+            return 0;
+        case farbwunsch:
+            if(pruef_karte.farbe == wunschfarbe) {
+                return 1;
+            }
+            return 0;
+        default:
+            printf("Diesen Kartentypen gibt es leider nicht");
+    }
+}
+
 
 
 
