@@ -1,28 +1,6 @@
-#include <stdio.h>
-#include "kartendeck.h"
-#include "stdlib.h"
+#include "handkarten.h"
 
-enum k_status {
-    inDerHand, aufDemStapel, abgelegt
-};
-enum {
-    spieler, bot1, bot2, bot3
-};
 
-void hole_handkarten_speicher();
-
-void teile_karten_aus();
-
-void zeige_handkarten_spieler();
-
-void ziehe_karten(int wer, int anzahl);
-
-void entferne_karte(int wer, int index);
-
-Karte *p_handkarten_spieler;
-Karte *p_handkarten_bot1;
-Karte *p_handkarten_bot2;
-Karte *p_handkarten_bot3;
 int anzahl_karten_spieler = 0;
 int anzahl_karten_bot1 = 0;
 int anzahl_karten_bot2 = 0;

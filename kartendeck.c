@@ -1,24 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-enum k_status{ inDerHand, aufDemStapel, abgelegt };
-enum k_typ{ zahl, plus2, plus4, aussetzen, richtungswechsel, farbwunsch };
-enum k_farbe{ blau, rot, gruen, gelb, schwarz };
+#include "kartendeck.h"
 
-void kopiere_karten();
-void mische_karten();
-void zeige_kartenstapel();
-
-typedef struct {
-	int index; 
-	int status;
-	int typ;
-	int nummer;
-	int farbe;
-} Karte;
-
-Karte Kartenstapel[108];
-int oberste_stapel_karte;
-Karte letzte_karte;
 // SM
 Karte Kartendeck[108] = {
 	{0, aufDemStapel, zahl, 0, blau},
