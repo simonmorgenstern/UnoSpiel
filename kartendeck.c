@@ -124,7 +124,7 @@ void mische_karten() {
         Kartenstapel[i].index = i;
         Kartenstapel[j].index = j;
     }
-     zeige_kartenstapel(); // method for testing
+     // zeige_kartenstapel(); // method for testing
 }
 
 // SM 
