@@ -2,6 +2,9 @@
 #define karten_deck_never_used
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include "main.h"
+
 // SM
 void mische_karten();
 void decke_auf();
@@ -16,6 +19,8 @@ typedef struct{
 
 Karte Kartenstapel[108];
 int oberste_stapel_karte;
+Karte letzte_karte;
+int wunschfarbe;
 
 
 enum k_status{ inDerHand, aufDemStapel, abgelegt };
