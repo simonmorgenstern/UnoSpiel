@@ -9,12 +9,6 @@ void init_spiel();
 
 void spiel_schleife();
 
-enum richtung {
-    links, rechts
-};
-enum {
-    start, spiel, spielende
-};
 
 // Statusvariablen Spiel
 
