@@ -314,18 +314,6 @@ int meiste_karten_farbe(Karte *handkarten, int karten_anzahl) {
     return max_farbe;
 }
 
-void wuensche_farbe(int farbe) {
-    wunschfarbe = farbe;
-}
-
-void aendere_spielrichtung() {
-    if (spiel_richtung == rechts) {
-        spiel_richtung = links;
-    } else {
-        spiel_richtung = rechts;
-    }
-}
-
 void spiele_karte(int wer, int index) {
     switch (wer) {
         case bot1:
@@ -380,7 +368,35 @@ void spiele_karte(int wer, int index) {
             printf("spieler wurde nicht gefunden");
             break;
     }
+    if(letzte_karte.typ == aussetzen){
+        printf("da muss wohl einer aussetzen");
+        naechster_spieler(2);
+    }else{
+        naechster_spieler(1);
+    }
 }
+
+void wuensche_farbe(int farbe) {
+    wunschfarbe = farbe;
+}
+
+void aendere_spielrichtung() {
+    if (spiel_richtung == rechts) {
+        spiel_richtung = links;
+    } else {
+        spiel_richtung = rechts;
+    }
+}
+
+void naechster_spieler(int schritte) {
+    if(spiel_richtung == rechts){
+        aktueller_spieler = (aktueller_spieler + schritte) % 4;
+    } else {
+        aktueller_spieler = (4 + aktueller_spieler - schritte) % 4;
+    }
+}
+
+
 
 
 
