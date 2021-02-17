@@ -19,6 +19,8 @@ int pruefe_karte(Karte pruef_karte);
 int meiste_karten_farbe(Karte *handkarten, int karten_anzahl);
 void wuensche_farbe(int farbe);
 void spiele_karte(int wer, int index);
+void aendere_spielrichtung();
+void naechster_spieler(int schritte);
 
 Karte *p_handkarten_spieler;
 Karte *p_handkarten_bot1;

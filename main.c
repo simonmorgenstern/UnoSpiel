@@ -5,22 +5,13 @@
 #include "ende.h"                    //eingefügt
 
 
-void init_spiel();
 
-void spiel_schleife();
-
-enum richtung {
-    links, rechts
-};
-enum {
-    start, spiel, spielende
-};
 
 // Statusvariablen Spiel
 
 int spiel_richtung = rechts;
 int spieler_reihenfolge[4] = {spieler, bot1, bot2, bot3};
-int aktueller_spieler = spieler;
+int aktueller_spieler = bot1;
 int spielstatus = start;
 
 int main() {
@@ -37,9 +28,25 @@ int main() {
 void spiel_schleife() {
     decke_auf();
     spielstatus = spiel;
-    spielroutine_bot(bot1);
     while (spielstatus == spiel) {
-        break;
+        switch(spieler_reihenfolge[aktueller_spieler]){
+            case spieler:
+                // Spielroutine Spieler
+                printf("Spieler ist dran");
+                break;
+            case bot1:
+                printf("bot 1 ist dran \n");
+                spielroutine_bot(bot1);
+                break;
+            case bot2:
+                printf("bot 2 ist dran \n");
+                spielroutine_bot(bot2);
+                break;
+            case bot3:
+                printf("bot 3 ist dran \n");
+                spielroutine_bot(bot3);
+                break;
+        }
         // Hier finden alle Spielzüge statt
         // Prüfen ob einer gewonnen hat
     }

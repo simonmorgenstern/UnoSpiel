@@ -53,7 +53,7 @@ void teile_karten_aus() {
             oberste_stapel_karte++;
         }
     }
-   //zeige_handkarten_spieler();
+    //zeige_handkarten_spieler();
 }
 
 // SM
@@ -208,7 +208,6 @@ void spielroutine_bot(int wer) {
                     wuensche_farbe(farbe);
                 }
                 spiele_karte(bot1, karten_index);
-                // falls karte farbwunsch beinhaltet wird geschaut von welcher farbe der bot am meisten karten hat
             } else {
                 if (zieh_counter > 0) {
                     ziehe_karten(bot1, zieh_counter);
@@ -221,7 +220,15 @@ void spielroutine_bot(int wer) {
         case bot2:
             suche_moegliche_karten(p_handkarten_bot2, anzahl_karten_bot2, moegliche_karten, &anzahl_moegliche_karten);
             if (anzahl_moegliche_karten > 0) {
-
+                // wähle random
+                srand(time(NULL));
+                int r = rand() % anzahl_moegliche_karten;
+                int karten_index = moegliche_karten[r];
+                if (p_handkarten_bot2[karten_index].typ == farbwunsch || p_handkarten_bot2[karten_index].typ == plus4) {
+                    int farbe = meiste_karten_farbe(p_handkarten_bot2, anzahl_karten_bot2);
+                    wuensche_farbe(farbe);
+                }
+                spiele_karte(bot2, karten_index);
             } else {
                 if (zieh_counter > 0) {
                     ziehe_karten(bot2, zieh_counter);
@@ -234,7 +241,14 @@ void spielroutine_bot(int wer) {
         case bot3:
             suche_moegliche_karten(p_handkarten_bot3, anzahl_karten_bot3, moegliche_karten, &anzahl_moegliche_karten);
             if (anzahl_moegliche_karten > 0) {
-
+                srand(time(NULL));
+                int r = rand() % anzahl_moegliche_karten;
+                int karten_index = moegliche_karten[r];
+                if (p_handkarten_bot3[karten_index].typ == farbwunsch || p_handkarten_bot3[karten_index].typ == plus4) {
+                    int farbe = meiste_karten_farbe(p_handkarten_bot3, anzahl_karten_bot3);
+                    wuensche_farbe(farbe);
+                }
+                spiele_karte(bot3, karten_index);
             } else {
                 if (zieh_counter > 0) {
                     ziehe_karten(bot3, zieh_counter);
@@ -246,7 +260,6 @@ void spielroutine_bot(int wer) {
             break;
     }
     free(moegliche_karten);
-    // Ausgabe der Kartenzahl für den Spieler
 }
 
 void suche_moegliche_karten(Karte *handkarten, int karten_anzahl, int *moegliche_karten, int *anzahl_moegliche_karten) {
@@ -341,41 +354,97 @@ int meiste_karten_farbe(Karte *handkarten, int karten_anzahl) {
             max_anzahl_aktuell++;
         }
     }
-    if(max_anzahl_aktuell > max_anzahl_vorher){
+    if (max_anzahl_aktuell > max_anzahl_vorher) {
         max_farbe = gruen;
     }
     return max_farbe;
+}
+
+void spiele_karte(int wer, int index) {
+    switch (wer) {
+        case bot1:
+            letzte_karte = p_handkarten_bot1[index];
+            Kartenstapel[p_handkarten_bot1[index].index].status = abgelegt;
+            switch (p_handkarten_bot1[index].typ) {
+                case plus4:
+                    zieh_counter += 4;
+                    break;
+                case plus2:
+                    zieh_counter += 2;
+                    break;
+                case richtungswechsel:
+                    aendere_spielrichtung();
+                    break;
+            }
+            entferne_karte(bot1, index);
+            break;
+        case bot2:
+            letzte_karte = p_handkarten_bot2[index];
+            Kartenstapel[p_handkarten_bot2[index].index].status = abgelegt;
+            switch (p_handkarten_bot2[index].typ) {
+                case plus4:
+                    zieh_counter += 4;
+                    break;
+                case plus2:
+                    zieh_counter += 2;
+                    break;
+                case richtungswechsel:
+                    aendere_spielrichtung();
+                    break;
+            }
+            entferne_karte(bot2, index);
+            break;
+        case bot3:
+            letzte_karte = p_handkarten_bot3[index];
+            Kartenstapel[p_handkarten_bot3[index].index].status = abgelegt;
+            switch (p_handkarten_bot3[index].typ) {
+                case plus4:
+                    zieh_counter += 4;
+                    break;
+                case plus2:
+                    zieh_counter += 2;
+                    break;
+                case richtungswechsel:
+                    aendere_spielrichtung();
+                    break;
+            }
+            entferne_karte(bot3, index);
+            break;
+        default:
+            printf("Spieler wurde nicht gefunden");
+            break;
+    }
+    if(letzte_karte.typ == aussetzen){
+        printf("da muss wohl einer aussetzen");
+        naechster_spieler(2);
+    }else{
+        naechster_spieler(1);
+    }
 }
 
 void wuensche_farbe(int farbe) {
     wunschfarbe = farbe;
 }
 
-void spiele_karte(int wer, int index){
-    switch(wer){
-        case bot1:
-            letzte_karte = p_handkarten_bot1[index];
-            Kartenstapel[p_handkarten_bot1[index].index].status = abgelegt;
-            entferne_karte(bot1, index);
-            anzahl_karten_bot1--;
-            break;
-        case bot2:
-            letzte_karte = p_handkarten_bot2[index];
-            Kartenstapel[p_handkarten_bot2[index].index].status = abgelegt;
-            entferne_karte(bot2, index);
-            anzahl_karten_bot2--;
-            break;
-        case bot3:
-            letzte_karte = p_handkarten_bot3[index];
-            Kartenstapel[p_handkarten_bot3[index].index].status = abgelegt;
-            entferne_karte(bot3, index);
-            anzahl_karten_bot3--;
-            break;
-        default:
-            printf("Spieler wurde nicht gefunden");
-            break;
+void aendere_spielrichtung() {
+    if (spiel_richtung == rechts) {
+        spiel_richtung = links;
+    } else {
+        spiel_richtung = rechts;
     }
 }
+
+void naechster_spieler(int schritte) {
+    if(spiel_richtung == rechts){
+        aktueller_spieler = (aktueller_spieler + schritte) % 4;
+    } else {
+        aktueller_spieler = (4 + aktueller_spieler - schritte) % 4;
+    }
+}
+
+
+
+
 
 
 
