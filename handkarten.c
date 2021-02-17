@@ -59,7 +59,7 @@ void teile_karten_aus() {
 // SM
 void zeige_handkarten_spieler() {
     printf("\n Spielerkarten: \n");
-    for (int i = 0; i < anzahl_karten_spieler; i++) {
+    for (int i = 0; i < anzahl_karten_spieler; i++) {					//verschönern!!!//SL
         Karte k = p_handkarten_spieler[i];
         printf("Spielerkarte %d -> Typ: %d, Farbe: %d, Nummer: %d\n \n", i, k.typ, k.farbe, k.nummer);
     }
@@ -152,11 +152,51 @@ void entferne_karte(int wer, int index) {
     }
 }
 
+void spielroutine_spieler(int wer){
+	char a[10];
+	char b [16];
+	int *moegliche_karten = calloc(1, sizeof(int));
+    int anzahl_moegliche_karten = 0;
+	zeige_handkarten_spieler();
+	delay(2);
+	suche_moegliche_karten(p_handkarten_spieler, anzahl_karten_spieler, moegliche_karten, &anzahl_moegliche_karten);
+	if (anzahl_moegliche_karten > 0) {
+                suche_moegliche_karten(p_handkarten_spieler, anzahl_karten_spieler, moegliche_karten, &anzahl_moegliche_karten);
+                scanf("%s %s", a, b);
+                if ( a == farbe && (b == zahl || b == aussetzen || b == richtungswechsel || b == plus2){
+					
+				}
+				if ( a == plus4 && b == farbe){
+					
+				}
+				if ( a == farbwunsch && b == farbe){
+					
+				}
+                pruefe_karte(Karte pruef_karte);
+                }
+    else {
+		if (zieh_counter > 0) {
+			printf("Du musst %d Karten abheben\n", zieh_counter);
+			delay(2);
+			ziehe_karten(spieler, zieh_counter);
+            zieh_counter = 0;
+            }
+        else{
+            ziehe_karten(spieler, 1)
+            printf("Du kannst keine Karte legen, du ziehst eine Karte\n");
+            delay(2);
+            }
+    }
+	
+	
+}
+
 void spielroutine_bot(int wer) {
     int *moegliche_karten = calloc(1, sizeof(int));
     int anzahl_moegliche_karten = 0;
     switch (wer) {
         case bot1:
+			//printf("%p", p_handkarten_bot1);  //Kartenzahl des Bots anzeigen lassen
             suche_moegliche_karten(p_handkarten_bot1, anzahl_karten_bot1, moegliche_karten, &anzahl_moegliche_karten);
             if (anzahl_moegliche_karten > 0) {
                 // wähle random
@@ -220,38 +260,44 @@ void suche_moegliche_karten(Karte *handkarten, int karten_anzahl, int *moegliche
 }
 
 int pruefe_karte(Karte pruef_karte) {
-//    printf("Letzte Karte -> Typ: %d, Farbe: %d, Nummer: %d \n", letzte_karte.typ, letzte_karte.farbe, letzte_karte.nummer);
-//    printf("Pruefkarte -> Typ: %d, Farbe: %d, Nummer: %d\n \n", pruef_karte.typ, pruef_karte.farbe, pruef_karte.nummer); // Testausgaben
+//  printf("Letzte Karte -> Typ: %d, Farbe: %d, Nummer: %d \n", letzte_karte.typ, letzte_karte.farbe, letzte_karte.nummer);
+//  printf("Pruefkarte -> Typ: %d, Farbe: %d, Nummer: %d\n \n", pruef_karte.typ, pruef_karte.farbe, pruef_karte.nummer);
+//	Testausgaben
     switch (letzte_karte.typ) {
         case zahl:
-            if (letzte_karte.farbe == pruef_karte.farbe || letzte_karte.nummer == pruef_karte.nummer) {
+            if (letzte_karte.farbe == pruef_karte.farbe || letzte_karte.nummer == pruef_karte.nummer || pruef_karte.farbe == schwarz) {
                 return 1;
-            }
+            }				//auf zahl geht gleiche zahl, gleiche farbe, schwarz
             return 0;
         case plus2:
-            if (pruef_karte.typ == plus2 || pruef_karte.typ == plus4) {
-                return 1;
+			if (zieh_counter == 0){	//wenn vorheriger Spieler schon abgehoben hat
+				if (letzte_karte.farbe == pruef_karte.farbe || pruef_karte.farbe == schwarz || pruef_karte.typ == plus2) {) {
+					return 1;
             }
+            else{					//wenn Spieler eine "scharfe" Plus2 bekommt
+				if (pruef_karte.typ == plus2 || pruef_karte.typ == plus4) {
+					return 1;
+				}					//auf plus2 geht plus2 und schwarze plus4
             return 0;
         case plus4:
             if (pruef_karte.typ == plus4 || (pruef_karte.typ == plus2 && pruef_karte.farbe == wunschfarbe)) {
                 return 1;
-            }
+            }						//auf plus4 geht plus4 oder plus 2 in der richtigen farbe
             return 0;
         case aussetzen:
-            if (pruef_karte.typ == aussetzen || letzte_karte.farbe == pruef_karte.farbe) {
+            if (pruef_karte.typ == aussetzen || letzte_karte.farbe == pruef_karte.farbe || pruef_karte.farbe == schwarz) {
                 return 1;
-            }
+            }						//auf aussetzen geht gleiche farbe oder aussetzen oder schwarz
             return 0;
         case richtungswechsel:
-            if (pruef_karte.typ == richtungswechsel || letzte_karte.farbe == pruef_karte.farbe) {
+            if (pruef_karte.typ == richtungswechsel || letzte_karte.farbe == pruef_karte.farbe || pruef_karte.farbe == schwarz) {
                 return 1;
-            }
+            }						// auf richtungswechsel geht gleiche farbe oder richtungswechsel oder schwarz
             return 0;
         case farbwunsch:
-            if (pruef_karte.farbe == wunschfarbe) {
+            if (pruef_karte.farbe == wunschfarbe || pruef_karte.farbe == schwarz) {
                 return 1;
-            }
+            }						// auf farbwunsch geht gewünschte farbe oder schwarz
             return 0;
         default:
             printf("Diesen Kartentypen gibt es leider nicht");
@@ -326,7 +372,7 @@ void spiele_karte(int wer, int index){
             anzahl_karten_bot3--;
             break;
         default:
-            printf("spieler wurde nicht gefunden");
+            printf("Spieler wurde nicht gefunden");
             break;
     }
 }
