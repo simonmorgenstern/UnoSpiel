@@ -343,7 +343,6 @@ void spiele_karte(int wer, int index) {
                     break;
             }
             entferne_karte(bot1, index);
-            anzahl_karten_bot1--;
             break;
         case bot2:
             letzte_karte = p_handkarten_bot2[index];
@@ -360,7 +359,6 @@ void spiele_karte(int wer, int index) {
                     break;
             }
             entferne_karte(bot2, index);
-            anzahl_karten_bot2--;
             break;
         case bot3:
             letzte_karte = p_handkarten_bot3[index];
@@ -377,7 +375,6 @@ void spiele_karte(int wer, int index) {
                     break;
             }
             entferne_karte(bot3, index);
-            anzahl_karten_bot3--;
             break;
         default:
             printf("spieler wurde nicht gefunden");
