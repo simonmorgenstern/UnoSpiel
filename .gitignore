@@ -5,6 +5,5 @@ CMakeLists.txt
 
 #SL
 *.o
-
-
-
+*.exe
+*.geany
