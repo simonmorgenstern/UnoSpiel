@@ -1,11 +1,12 @@
 Normale Karte:
-"lege<farbe><zahl>"
-(z.B."legegelb7", "legeblau0")
+"<farbe> <zahl>"
+(z.B."gelb 7", "blau 0")
 
 Sonderkarten (Aussetzen, Richtungswechsel und Plus2):
-"lege<farbe><funktion>"
-(z.B. "legerotaussetzen","legegruenwechsel", "legegelbplus")
+"<farbe> <funktion>"
+(z.B. "rot aussetzen","gruen richtungswechsel", "gelb plus2")
 
-Schwarzen Sonderkarten:
-"lege<funktion><wunschfarbe>"
-(z.B. "legeplus4blau", "legewunschrot")
+Schwarze Sonderkarten:
+"<farbe> <funktion>"
+(z.B. "schwarz plus 4", "schwarz wunschfarbe")
+Die Wunschfarbe wird seperat abgefragt.
