@@ -152,14 +152,14 @@ void entferne_karte(int wer, int index) {
     }
 }
 
-void spielroutine_spieler(int wer){
+void spielroutine_spieler(int wer){	
 	char erste_eingabe[10];
 	char zweite_eingabe [16];
 	int ist_karte_nummer;
 	int *moegliche_karten = calloc(1, sizeof(int));
     int anzahl_moegliche_karten = 0;
     zeige_handkarten_spieler();
-	//pause(2);
+	pause(2);
 	suche_moegliche_karten(p_handkarten_spieler, anzahl_karten_spieler, moegliche_karten, &anzahl_moegliche_karten);
 	if (anzahl_moegliche_karten > 0) {			
                 printf("Welche Karte willst du spielen?\n");
@@ -195,14 +195,14 @@ void spielroutine_spieler(int wer){
     else {
 		if (zieh_counter > 0) {
 			printf("Du musst %d Karten abheben\n", zieh_counter);
-			//pause(2);
+			pause(2);
 			ziehe_karten(spieler, zieh_counter);
             zieh_counter = 0;
             }
         else{
             ziehe_karten(spieler, 1);
             printf("Du kannst nichts spielen, du ziehst eine Karte\n");
-            //pause(2);
+            pause(2);
         }
     }
 }
@@ -360,9 +360,16 @@ int pruefe_karte(Karte pruef_karte) {
             return 0;
             break;
         case plus4:
-            if (pruef_karte.typ == plus4 || (pruef_karte.typ == plus2 && pruef_karte.farbe == wunschfarbe)) {
-                return 1;
-            }						//auf plus4 geht plus4 oder plus 2 in der richtigen farbe
+			if (zieh_counter == 0){	//wenn vorheriger Spieler schon abgehoben hat
+				if (pruef_karte.typ == plus4 || (pruef_karte.typ == plus2 && pruef_karte.farbe == wunschfarbe)) {
+					return 1;
+				}						//auf plus4 geht plus4 oder plus 2 in der richtigen farbe
+			}
+			else{				//wenn Spieler eine "scharfe" Plus4 bekommt
+				if (pruef_karte.typ == plus2 || pruef_karte.typ == plus4) {
+					return 1;
+				}
+			}
             return 0;
             break;
         case aussetzen:
@@ -487,7 +494,11 @@ void spiele_karte(int wer, int index) {
 			letzte_karte = p_handkarten_spieler[index];
             Kartenstapel[p_handkarten_spieler[index].index].status = abgelegt;
             switch (p_handkarten_spieler[index].typ) {
+				case farbwunsch:
+					wuensche_farbe_spieler();
+					break;
                 case plus4:
+					wuensche_farbe_spieler();
                     zieh_counter += 4;
                     break;
                 case plus2:
@@ -513,6 +524,16 @@ void spiele_karte(int wer, int index) {
 
 void wuensche_farbe(int farbe) {
     wunschfarbe = farbe;
+}
+
+void wuensche_farbe_spieler() {
+	char eingegebene_wunschfarbe;
+	int gewuentschte_farbe;
+	printf("Bitte eine Farbe eingeben.\n");
+	do{
+		scanf("%s\n", &eingegebene_wunschfarbe);
+		gewuentschte_farbe = gib_farbe(&eingegebene_wunschfarbe);
+	}while (gewuentschte_farbe == 404 || gewuentschte_farbe == schwarz);
 }
 
 void aendere_spielrichtung() {
