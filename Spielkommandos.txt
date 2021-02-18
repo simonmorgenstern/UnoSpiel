@@ -6,7 +6,7 @@ Sonderkarten (Aussetzen, Richtungswechsel und Plus2):
 "<farbe> <funktion>"
 (z.B. "rot aussetzen","gruen richtungswechsel", "gelb plus2")
 
-Schwarze Sonderkarten:
+Schwarzen Sonderkarten:
 "<farbe> <funktion>"
-(z.B. "schwarz plus 4", "schwarz wunschfarbe")
+(z.B. "schwarz plus 4", "schwarz farbwunsch")
 Die Wunschfarbe wird seperat abgefragt.

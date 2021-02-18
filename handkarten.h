@@ -21,6 +21,7 @@ int meiste_karten_farbe(Karte *handkarten, int karten_anzahl);
 int gib_farbe(char *a);
 int gib_funktion(char *b, int *c);
 void wuensche_farbe(int farbe);
+void wuensche_farbe_spieler();
 void spiele_karte(int wer, int index);
 void aendere_spielrichtung();
 void naechster_spieler(int schritte);

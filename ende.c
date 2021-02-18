@@ -27,6 +27,7 @@ int spiel_ende_benachrichtigung(){
 	else{
 		printf("Glückwunsch, du hast gewonnen ^-^ \n");
 	}
+	pause(3);
 	printf("Möchtest du noch einmal spielen?\nWenn ja bestaetige mit y oder n.\nOder willst du wieder ins Menue? -> m\n");
 	spiel_fortsetzen = getchar();
 	while(getchar() != '\n');
