@@ -62,3 +62,10 @@ void init_spiel() {
     teile_karten_aus();
 }
 
+// Linux 1000000 | Windoof 1000
+void pause(int nummer_sekunden)
+{
+    int millisekunden = 1000 * nummer_sekunden;
+    clock_t start_zeit = clock();
+    while (clock() < start_zeit + millisekunden);
+}
