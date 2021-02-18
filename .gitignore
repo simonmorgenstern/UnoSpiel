@@ -7,3 +7,4 @@ CMakeLists.txt
 *.o
 *.exe
 *.geany
+*.h.gch

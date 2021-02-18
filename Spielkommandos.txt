@@ -8,5 +8,5 @@ Sonderkarten (Aussetzen, Richtungswechsel und Plus2):
 
 Schwarzen Sonderkarten:
 "<farbe> <funktion>"
-(z.B. "schwarz plus 4", "schwarz farbwunsch")
+(z.B. "schwarz plus4", "schwarz farbwunsch")
 Die Wunschfarbe wird seperat abgefragt.
