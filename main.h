@@ -14,5 +14,6 @@ int aktueller_spieler;
 
 void init_spiel();
 void spiel_schleife();
+void pause();
 
 #endif

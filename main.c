@@ -11,7 +11,7 @@
 
 int spiel_richtung = rechts;
 int spieler_reihenfolge[4] = {spieler, bot1, bot2, bot3};
-int aktueller_spieler = bot1;
+int aktueller_spieler = spieler;
 int spielstatus = start;
 
 int main() {
@@ -31,21 +31,24 @@ void spiel_schleife() {
     while (spielstatus == spiel) {
         switch(spieler_reihenfolge[aktueller_spieler]){
             case spieler:
-                // Spielroutine Spieler
+                printf("spieler ist dran \n");
                 spielroutine_spieler();
+                naechster_spieler(1);
                 break;
             case bot1:
-                printf("bot 1 ist dran \n");
+                printf("\n bot 1 ist dran \n");
                 spielroutine_bot(bot1);
                 break;
             case bot2:
-                printf("bot 2 ist dran \n");
+                printf("\n bot 2 ist dran \n");
                 spielroutine_bot(bot2);
                 break;
             case bot3:
-                printf("bot 3 ist dran \n");
+                printf("\n bot 3 ist dran \n");
                 spielroutine_bot(bot3);
                 break;
+            default:
+                printf("kann spieler nicht finden");
         }
         if(anzahl_karten_spieler == 0 || anzahl_karten_bot1 == 0 || anzahl_karten_bot2 == 0 || anzahl_karten_bot3 == 0){
             spielstatus = spielende;
