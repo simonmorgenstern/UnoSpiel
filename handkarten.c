@@ -62,6 +62,7 @@ void teile_karten_aus() {
 void zeige_handkarten_spieler() {
     printf("\nSpielerkarten: \n");
     for (int i = 0; i < anzahl_karten_spieler; i++) {					//verschönern!!!//SL, bessere Darstellung
+
         Karte k = p_handkarten_spieler[i];
         printf("Spielerkarte %d -> Typ: %s, Farbe: %s, Nummer: %d\n \n", i, karten_uebersetzung_typ[k.typ], karten_uebersetzung_farbe[k.farbe], k.nummer);
     }
@@ -73,43 +74,57 @@ void ziehe_karten(int wer, int anzahl) {
         case spieler:
             printf("Du musst %d Karte(n) ziehen.\n", anzahl);
             p_handkarten_spieler = realloc(p_handkarten_spieler, (anzahl_karten_spieler + anzahl) * sizeof(Karte));
+            if (p_handkarten_spieler == NULL) {
+                printf("Speicheranforderung fehlgeschlagen");
+            }
             for (int i = 0; i < anzahl; i++) {
                 p_handkarten_spieler[anzahl_karten_spieler + i] = Kartenstapel[oberste_stapel_karte];
                 Kartenstapel[oberste_stapel_karte].status = inDerHand;
                 oberste_stapel_karte++;
             }
-            anzahl_karten_spieler += anzahl;
+            anzahl_karten_spieler= anzahl_karten_spieler + anzahl;
 //            zeige_handkarten_spieler();
             break;
         case bot1:
             printf("Soeren zieht %d Karte(n).\n", anzahl);
             p_handkarten_bot1 = realloc(p_handkarten_bot1, (anzahl_karten_bot1 + anzahl) * sizeof(Karte));
+            if (p_handkarten_bot1 == NULL) {
+                printf("Speicheranforderung fehlgeschlagen");
+            }
             for (int i = 0; i < anzahl; i++) {
                 p_handkarten_bot1[anzahl_karten_bot1 + i] = Kartenstapel[oberste_stapel_karte];
                 Kartenstapel[oberste_stapel_karte].status = inDerHand;
                 oberste_stapel_karte++;
             }
-            anzahl_karten_bot1 += anzahl;
+            anzahl_karten_bot1 = anzahl_karten_bot1 + anzahl;
             break;
         case bot2:
             printf("Brigitte zieht %d Karte(n).\n", anzahl);
             p_handkarten_bot2 = realloc(p_handkarten_bot2, (anzahl_karten_bot2 + anzahl) * sizeof(Karte));
+            if (p_handkarten_bot2 == NULL) {
+                printf("Speicheranforderung fehlgeschlagen");
+            }
+
             for (int i = 0; i < anzahl; i++) {
                 p_handkarten_bot2[anzahl_karten_bot2 + i] = Kartenstapel[oberste_stapel_karte];
                 Kartenstapel[oberste_stapel_karte].status = inDerHand;
                 oberste_stapel_karte++;
             }
-            anzahl_karten_bot2 += anzahl;
+            anzahl_karten_bot2 = anzahl_karten_bot2 + anzahl;
             break;
         case bot3:
             printf("Guenther zieht %d Karte(n).\n", anzahl);
             p_handkarten_bot3 = realloc(p_handkarten_bot1, (anzahl_karten_bot3 + anzahl) * sizeof(Karte));
+            if (p_handkarten_bot3 == NULL) {
+                printf("Speicheranforderung fehlgeschlagen");
+            }
+
             for (int i = 0; i < anzahl; i++) {
                 p_handkarten_bot3[anzahl_karten_bot3 + i] = Kartenstapel[oberste_stapel_karte];
                 Kartenstapel[oberste_stapel_karte].status = inDerHand;
                 oberste_stapel_karte++;
             }
-            anzahl_karten_bot3 += anzahl;
+            anzahl_karten_bot3 = anzahl_karten_bot3 + anzahl;
             break;
         default:
             printf("Es gab ein Fehler beim Ziehen der Karten.\n");
@@ -124,14 +139,19 @@ void entferne_karte(int wer, int index) {
                 p_handkarten_spieler[i] = p_handkarten_spieler[i + 1];
             }
             p_handkarten_spieler = realloc(p_handkarten_spieler, (anzahl_karten_spieler - 1) * sizeof(Karte));
+            if (p_handkarten_spieler == NULL) {
+                printf("Speicheranforderung fehlgeschlagen");
+            }
             anzahl_karten_spieler--;
-            zeige_handkarten_spieler();
             break;
         case bot1:
             for (int i = index; i < anzahl_karten_bot1 - 1; i++) {
                 p_handkarten_bot1[i] = p_handkarten_bot1[i + 1];
             }
             p_handkarten_bot1 = realloc(p_handkarten_bot1, (anzahl_karten_bot1 - 1) * sizeof(Karte));
+            if (p_handkarten_bot1 == NULL) {
+                printf("Speicheranforderung fehlgeschlagen");
+            }
             anzahl_karten_bot1--;
             break;
         case bot2:
@@ -139,6 +159,9 @@ void entferne_karte(int wer, int index) {
                 p_handkarten_bot2[i] = p_handkarten_bot2[i + 1];
             }
             p_handkarten_bot2 = realloc(p_handkarten_bot2, (anzahl_karten_bot2 - 1) * sizeof(Karte));
+            if (p_handkarten_bot2 == NULL) {
+                printf("Speicheranforderung fehlgeschlagen");
+            }
             anzahl_karten_bot2--;
             break;
         case bot3:
@@ -146,6 +169,9 @@ void entferne_karte(int wer, int index) {
                 p_handkarten_bot3[i] = p_handkarten_bot3[i + 1];
             }
             p_handkarten_bot3 = realloc(p_handkarten_bot3, (anzahl_karten_bot3 - 1) * sizeof(Karte));
+            if (p_handkarten_bot3 == NULL) {
+                printf("Speicheranforderung fehlgeschlagen");
+            }
             anzahl_karten_bot3--;
             break;
         default:
@@ -202,68 +228,83 @@ void spielroutine_spieler(){
 			ziehe_karten(spieler, zieh_counter);
             zieh_counter = 0;
             }
-        else{
+        } while (eingabe_erfolgreich == 0);
+    } else {
+        if (zieh_counter > 0) {
+            printf("Du musst %d Karten abheben\n", zieh_counter);
+            pause(2);
+            ziehe_karten(spieler, zieh_counter);
+            zieh_counter = 0;
+        } else {
             ziehe_karten(spieler, 1);
             printf("Du kannst nichts spielen, du ziehst eine Karte.\n");
             pause(2);
         }
+        naechster_spieler(1);
+    }
+    free(moegliche_karten);
+    printf("ende spieler zug");
+}
+
+int gib_farbe(char *erste_eingabe) {
+    if (strcmp(erste_eingabe, "blau") == 0) {
+        return blau;
+    }
+    if (strcmp(erste_eingabe, "gruen") == 0) {
+        return gruen;
+    }
+    if (strcmp(erste_eingabe, "rot") == 0) {
+        return rot;
+    }
+    if (strcmp(erste_eingabe, "gelb") == 0) {
+        return gelb;
+    }
+    if (strcmp(erste_eingabe, "schwarz") == 0) {
+        return schwarz;
+    } else {
+        return 404;
     }
 }
 
-int gib_farbe(char *erste_eingabe){
-		if(strcmp(erste_eingabe, "blau") == 0){
-			return blau;
-		}
-		if(strcmp(erste_eingabe, "gruen") == 0){
-			return gruen;
-		}
-		if(strcmp(erste_eingabe, "rot") == 0){
-			return rot;
-		}
-		if(strcmp(erste_eingabe, "gelb") == 0){
-			return gelb;
-		}
-		if(strcmp(erste_eingabe, "schwarz") == 0){
-			return schwarz;
-		}
-		else{
-			return 404;
-		}
-}
-
-int gib_funktion(char *zweite_eingabe,int *ist_karte_nummer){			//zahl, plus2, plus4, aussetzen, richtungswechsel, farbwunsch
-		if(strcmp(zweite_eingabe, "plus2") == 0){
-			*ist_karte_nummer = 0;
-			return plus2;
-		}
-		if(strcmp(zweite_eingabe, "plus4") == 0){
-			*ist_karte_nummer = 0;
-			return plus4;
-		}
-		if(strcmp(zweite_eingabe, "aussetzen") == 0){
-			*ist_karte_nummer = 0;
-			return aussetzen;
-		}
-		if(strcmp(zweite_eingabe, "richtungswechsel") == 0){
-			*ist_karte_nummer = 0;
-			return richtungswechsel;
-		}
-		if(strcmp(zweite_eingabe, "farbwunsch") == 0){
-			*ist_karte_nummer = 0;
-			return farbwunsch;
-		}
-		int karten_zahl = atoi(zweite_eingabe);
-		*ist_karte_nummer = 1;
-		return karten_zahl;
+int gib_funktion(char *zweite_eingabe,
+                 int *ist_karte_nummer) {            //zahl, plus2, plus4, aussetzen, richtungswechsel, farbwunsch
+    if (strcmp(zweite_eingabe, "plus2") == 0) {
+        *ist_karte_nummer = 0;
+        return plus2;
+    }
+    if (strcmp(zweite_eingabe, "plus4") == 0) {
+        *ist_karte_nummer = 0;
+        return plus4;
+    }
+    if (strcmp(zweite_eingabe, "aussetzen") == 0) {
+        *ist_karte_nummer = 0;
+        return aussetzen;
+    }
+    if (strcmp(zweite_eingabe, "richtungswechsel") == 0) {
+        *ist_karte_nummer = 0;
+        return richtungswechsel;
+    }
+    if (strcmp(zweite_eingabe, "farbwunsch") == 0) {
+        *ist_karte_nummer = 0;
+        return farbwunsch;
+    }
+    int karten_zahl = atoi(zweite_eingabe);
+    *ist_karte_nummer = 1;
+    return karten_zahl;
 }
 
 void spielroutine_bot(int wer) {
-    int *moegliche_karten = calloc(1, sizeof(int));
+    int *moegliche_karten = (int *) calloc(1, sizeof(int));
+    if (moegliche_karten == NULL) {
+        printf("Speicheranforderung fehlgeschlagen");
+    }
+
     int anzahl_moegliche_karten = 0;
     switch (wer) {
         case bot1:
 			printf("Soeren hat noch %d Karte(n).\n", anzahl_karten_bot1);  //Kartenzahl des Bots anzeigen lassen
 			pause(2);
+
             suche_moegliche_karten(p_handkarten_bot1, anzahl_karten_bot1, moegliche_karten, &anzahl_moegliche_karten);
             if (anzahl_moegliche_karten > 0) {
                 // wähle random
@@ -284,6 +325,7 @@ void spielroutine_bot(int wer) {
                     ziehe_karten(bot1, 1);
                     printf("Soeren kann nicht legen, er hebt ab.\n");
                 }
+                naechster_spieler(1);
             }
             break;
         case bot2:
@@ -309,6 +351,7 @@ void spielroutine_bot(int wer) {
                     ziehe_karten(bot2, 1);
                     printf("Brigitte kann nicht legen, sie hebt ab.\n");
                 }
+                naechster_spieler(1);
             }
             break;
         case bot3:
@@ -333,6 +376,7 @@ void spielroutine_bot(int wer) {
                     ziehe_karten(bot3, 1);
                     printf("Guenther kann nicht legen, er hebt ab.\n");
                 }
+                naechster_spieler(1);
             }
             break;
     }
@@ -344,6 +388,9 @@ void suche_moegliche_karten(Karte *handkarten, int karten_anzahl, int *moegliche
         if (pruefe_karte(handkarten[i]) == 1) {
             *anzahl_moegliche_karten = *anzahl_moegliche_karten + 1;
             moegliche_karten = realloc(moegliche_karten, (*anzahl_moegliche_karten * sizeof(int)));
+            if(moegliche_karten == NULL) {
+                printf("fehler in der suche moeglich karten");
+            }
             moegliche_karten[*anzahl_moegliche_karten - 1] = i;
         }
     }
@@ -353,62 +400,64 @@ int pruefe_karte(Karte pruef_karte) {
 //  printf("Letzte Karte -> Typ: %d, Farbe: %d, Nummer: %d \n", letzte_karte.typ, letzte_karte.farbe, letzte_karte.nummer);
 //  printf("Pruefkarte -> Typ: %d, Farbe: %d, Nummer: %d\n \n", pruef_karte.typ, pruef_karte.farbe, pruef_karte.nummer);
 //	Testausgaben
-    switch(letzte_karte.typ){
+    switch (letzte_karte.typ) {
         case zahl:
-            if (letzte_karte.farbe == pruef_karte.farbe || letzte_karte.nummer == pruef_karte.nummer || pruef_karte.farbe == schwarz) {
+            if (letzte_karte.farbe == pruef_karte.farbe || letzte_karte.nummer == pruef_karte.nummer ||
+                pruef_karte.farbe == schwarz) {
                 return 1;
-            }				//auf zahl geht gleiche zahl, gleiche farbe, schwarz
+            }                //auf zahl geht gleiche zahl, gleiche farbe, schwarz
             return 0;
             break;
         case plus2:
-			if (zieh_counter == 0){	//wenn vorheriger Spieler schon abgehoben hat
-				if (letzte_karte.farbe == pruef_karte.farbe || pruef_karte.farbe == schwarz || pruef_karte.typ == plus2) {
-					return 1;
-				}
-				else{				//wenn Spieler eine "scharfe" Plus2 bekommt
-				if (pruef_karte.typ == plus2 || pruef_karte.typ == plus4) {
-					return 1;
-					}
-				}
-			}						//auf plus2 geht plus2 und schwarze plus4
+            if (zieh_counter == 0) {    //wenn vorheriger Spieler schon abgehoben hat
+                if (letzte_karte.farbe == pruef_karte.farbe || pruef_karte.farbe == schwarz ||
+                    pruef_karte.typ == plus2) {
+                    return 1;
+                } else {                //wenn Spieler eine "scharfe" Plus2 bekommt
+                    if (pruef_karte.typ == plus2 || pruef_karte.typ == plus4) {
+                        return 1;
+                    }
+                }
+            }                        //auf plus2 geht plus2 und schwarze plus4
             return 0;
             break;
         case plus4:
-			if (zieh_counter == 0){	//wenn vorheriger Spieler schon abgehoben hat
-				if (pruef_karte.typ == plus4 || (pruef_karte.typ == plus2 && pruef_karte.farbe == wunschfarbe)) {
-					return 1;
-				}						//auf plus4 geht plus4 oder plus 2 in der richtigen farbe
-			}
-			else{				//wenn Spieler eine "scharfe" Plus4 bekommt
-				if (pruef_karte.typ == plus2 || pruef_karte.typ == plus4) {
-					return 1;
-				}
-			}
+            if (zieh_counter == 0) {    //wenn vorheriger Spieler schon abgehoben hat
+                if (pruef_karte.typ == plus4 || (pruef_karte.typ == plus2 && pruef_karte.farbe == wunschfarbe)) {
+                    return 1;
+                }                        //auf plus4 geht plus4 oder plus 2 in der richtigen farbe
+            } else {                //wenn Spieler eine "scharfe" Plus4 bekommt
+                if (pruef_karte.typ == plus2 || pruef_karte.typ == plus4) {
+                    return 1;
+                }
+            }
             return 0;
             break;
         case aussetzen:
-            if (pruef_karte.typ == aussetzen || letzte_karte.farbe == pruef_karte.farbe || pruef_karte.farbe == schwarz) {
+            if (pruef_karte.typ == aussetzen || letzte_karte.farbe == pruef_karte.farbe ||
+                pruef_karte.farbe == schwarz) {
                 return 1;
-            }						//auf aussetzen geht gleiche farbe oder aussetzen oder schwarz
+            }                        //auf aussetzen geht gleiche farbe oder aussetzen oder schwarz
             return 0;
             break;
         case richtungswechsel:
-            if (pruef_karte.typ == richtungswechsel || letzte_karte.farbe == pruef_karte.farbe || pruef_karte.farbe == schwarz) {
+            if (pruef_karte.typ == richtungswechsel || letzte_karte.farbe == pruef_karte.farbe ||
+                pruef_karte.farbe == schwarz) {
                 return 1;
-            }						// auf richtungswechsel geht gleiche farbe oder richtungswechsel oder schwarz
+            }                        // auf richtungswechsel geht gleiche farbe oder richtungswechsel oder schwarz
             return 0;
             break;
         case farbwunsch:
             if (pruef_karte.farbe == wunschfarbe || pruef_karte.farbe == schwarz) {
                 return 1;
-            }						// auf farbwunsch geht gewünschte farbe oder schwarz
+            }                        // auf farbwunsch geht gewünschte farbe oder schwarz
             return 0;
             break;
         default:
             printf("Diesen Kartentypen gibt es leider nicht.\n");
             break;
-	}
-	return 0;
+    }
+    return 0;
 }
 
 int meiste_karten_farbe(Karte *handkarten, int karten_anzahl) {
@@ -507,15 +556,15 @@ void spiele_karte(int wer, int index) {
             printf("Guenther hat folgende Karte gelegt: %s %s %d \n", karten_uebersetzung_farbe[p_handkarten_bot3[index].farbe], karten_uebersetzung_typ[p_handkarten_bot3[index].typ], p_handkarten_bot3[index].nummer);
             entferne_karte(bot3, index);
             break;
-         case spieler:
-			letzte_karte = p_handkarten_spieler[index];
+        case spieler:
+            letzte_karte = p_handkarten_spieler[index];
             Kartenstapel[p_handkarten_spieler[index].index].status = abgelegt;
             switch (p_handkarten_spieler[index].typ) {
-				case farbwunsch:
-					wuensche_farbe_spieler();
-					break;
+                case farbwunsch:
+                    wuensche_farbe_spieler();
+                    break;
                 case plus4:
-					wuensche_farbe_spieler();
+                    wuensche_farbe_spieler();
                     zieh_counter += 4;
                     break;
                 case plus2:
@@ -526,7 +575,6 @@ void spiele_karte(int wer, int index) {
                     break;
             }
             entferne_karte(spieler, index);
-			break;
         default:
             printf("Spieler wurde nicht gefunden.\n");
             break;
@@ -534,7 +582,7 @@ void spiele_karte(int wer, int index) {
     if(letzte_karte.typ == aussetzen){
         printf("Du musst wohl leider aussetzen.\n");
         naechster_spieler(2);
-    }else{
+    } else {
         naechster_spieler(1);
     }
 }
@@ -562,7 +610,7 @@ void aendere_spielrichtung() {
 }
 
 void naechster_spieler(int schritte) {
-    if(spiel_richtung == rechts){
+    if (spiel_richtung == rechts) {
         aktueller_spieler = (aktueller_spieler + schritte) % 4;
     } else {
         aktueller_spieler = (4 + aktueller_spieler - schritte) % 4;
