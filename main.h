@@ -11,7 +11,7 @@ int spiel_richtung;
 int spieler_reihenfolge[4];
 int aktueller_spieler;
 
-
+void pause();
 void init_spiel();
 void spiel_schleife();
 
