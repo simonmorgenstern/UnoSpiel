@@ -27,6 +27,10 @@ enum k_status{ inDerHand, aufDemStapel, abgelegt };
 enum k_typ{ zahl, plus2, plus4, aussetzen, richtungswechsel, farbwunsch };
 enum k_farbe{ blau, rot, gruen, gelb, schwarz };
 
+char karten_uebersetzung_farbe[5][8];
+char karten_uebersetzung_typ[6][18];
+
+
 void kopiere_karten();
 void mische_karten();
 void zeige_kartenstapel();
