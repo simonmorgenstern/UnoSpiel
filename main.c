@@ -32,7 +32,7 @@ void spiel_schleife() {
         switch(spieler_reihenfolge[aktueller_spieler]){
             case spieler:
                 // Spielroutine Spieler
-                printf("Spieler ist dran");
+                spielroutine_spieler();
                 break;
             case bot1:
                 printf("bot 1 ist dran \n");
@@ -47,8 +47,9 @@ void spiel_schleife() {
                 spielroutine_bot(bot3);
                 break;
         }
-        // Hier finden alle Spielzüge statt
-        // Prüfen ob einer gewonnen hat
+        if(anzahl_karten_spieler == 0 || anzahl_karten_bot1 == 0 || anzahl_karten_bot2 == 0 || anzahl_karten_bot3 == 0){
+            spielstatus = spielende;
+        }
     }
     printf("Spiel Ende \n");
     // Spielende Funktion wird aufgerufen
@@ -61,3 +62,10 @@ void init_spiel() {
     teile_karten_aus();
 }
 
+// Linux 1000000 | Windoof 1000
+void pause(int nummer_sekunden)
+{
+    int millisekunden = 1000 * nummer_sekunden;
+    clock_t start_zeit = clock();
+    while (clock() < start_zeit + millisekunden);
+}
