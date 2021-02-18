@@ -187,12 +187,12 @@ void spielroutine_spieler(){
 	int ist_karte_nummer;
 	int *moegliche_karten = calloc(1, sizeof(int));
     int anzahl_moegliche_karten = 0;
+    int eingabe_erfolgreich = 0;
     zeige_handkarten_spieler();
 	pause(2);
 	suche_moegliche_karten(p_handkarten_spieler, anzahl_karten_spieler, moegliche_karten, &anzahl_moegliche_karten);
 	if (anzahl_moegliche_karten > 0) {			
                 printf("Welche Karte willst du spielen?\n");
-                int eingabe_erfolgreich = 0;
 				do {
 					scanf("%s %s", erste_eingabe, zweite_eingabe);
 					int karten_funktion = gib_funktion(zweite_eingabe, &ist_karte_nummer);
@@ -220,16 +220,8 @@ void spielroutine_spieler(){
 						}
 				}
                 while(eingabe_erfolgreich == 0);
-			}
+	}
     else {
-		if (zieh_counter > 0) {
-			printf("Du musst %d Karten abheben.\n", zieh_counter);
-			pause(2);
-			ziehe_karten(spieler, zieh_counter);
-            zieh_counter = 0;
-            }
-        } while (eingabe_erfolgreich == 0);
-    } else {
         if (zieh_counter > 0) {
             printf("Du musst %d Karten abheben\n", zieh_counter);
             pause(2);
