@@ -14,7 +14,7 @@ void zeige_handkarten_spieler();
 void ziehe_karten(int wer, int anzahl);
 void entferne_karte(int wer, int index);
 void spielroutine_bot(int wer);
-void spielroutine_spieler(int wer);
+void spielroutine_spieler();
 void suche_moegliche_karten(Karte *handkarten, int karten_anzahl, int *moegliche_karten, int *anzahl_moegliche_karten);
 int pruefe_karte(Karte pruef_karte);
 int meiste_karten_farbe(Karte *handkarten, int karten_anzahl);

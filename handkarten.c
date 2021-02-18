@@ -152,7 +152,8 @@ void entferne_karte(int wer, int index) {
     }
 }
 
-void spielroutine_spieler(int wer){	
+
+void spielroutine_spieler(){
 	char erste_eingabe[10];
 	char zweite_eingabe [16];
 	int ist_karte_nummer;
