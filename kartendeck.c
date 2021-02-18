@@ -149,9 +149,13 @@ void zeige_kartenstapel() {
 	}
 }
 
+char karten_uebersetzung_farbe[5][8]={
+	"blau", "rot", "gruen", "gelb", "schwarz"
+};
 
-
-
+char karten_uebersetzung_typ[6][18]={
+	"zahl", "plus2", "plus4", "aussetzen", "richtungswechsel", "farbwunsch"
+};
 
 
 

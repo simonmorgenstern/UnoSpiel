@@ -35,23 +35,38 @@ void spiel_schleife() {
                 spielroutine_spieler();
                 break;
             case bot1:
-                printf("bot 1 ist dran \n");
+                printf("Soeren ist dran \n");
                 spielroutine_bot(bot1);
+                pause(2);
                 break;
             case bot2:
-                printf("bot 2 ist dran \n");
+                printf("Brigitte ist dran \n");
                 spielroutine_bot(bot2);
+                pause(2);
                 break;
             case bot3:
-                printf("bot 3 ist dran \n");
+                printf("Guenther ist dran \n");
                 spielroutine_bot(bot3);
+                pause(2);
                 break;
         }
         if(anzahl_karten_spieler == 0 || anzahl_karten_bot1 == 0 || anzahl_karten_bot2 == 0 || anzahl_karten_bot3 == 0){
             spielstatus = spielende;
+            if (anzahl_karten_bot1 == 0){
+				printf("Soeren hat gewonnen.\n");
+				pause(2);
+			}
+			if (anzahl_karten_bot2 == 0){
+				printf("Brigitte hat gewonnen.\n");
+				pause(2);	
+			}
+			if (anzahl_karten_bot3 == 0){
+				printf("Guenther hat gewonnen.\n");
+				pause(2);	
+			}
         }
     }
-    printf("Spiel Ende \n");
+    //printf("Spiel Ende \n");
     // Spielende Funktion wird aufgerufen
     // Abfrage ob erneut gespielt werden soll
 }

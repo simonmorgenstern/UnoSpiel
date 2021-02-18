@@ -40,6 +40,7 @@ int spiel_ende_benachrichtigung(){
 			break;
 		case 'm':
 			menue();
+			break;
 	}
 	return 0;
 }
