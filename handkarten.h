@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "main.h"
+#include <string.h>
 
 void hole_handkarten_speicher();
 void teile_karten_aus();
@@ -17,6 +18,8 @@ void spielroutine_spieler(int wer);
 void suche_moegliche_karten(Karte *handkarten, int karten_anzahl, int *moegliche_karten, int *anzahl_moegliche_karten);
 int pruefe_karte(Karte pruef_karte);
 int meiste_karten_farbe(Karte *handkarten, int karten_anzahl);
+int gib_farbe(char *a);
+int gib_funktion(char *b, int *c);
 void wuensche_farbe(int farbe);
 void spiele_karte(int wer, int index);
 void aendere_spielrichtung();
@@ -32,6 +35,7 @@ int anzahl_karten_bot1;
 int anzahl_karten_bot2;
 int anzahl_karten_bot3;
 int zieh_counter;
+
 
 
 #endif

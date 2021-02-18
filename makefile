@@ -13,7 +13,7 @@ $(Objektdateien):
 main.o: main.c kartendeck.h handkarten.h menue.h ende.h
 menue.o: menue.c menue.h
 kartendeck.o: kartendeck.c kartendeck.h
-handkarten.o: handkarten.c handkarten.h kartendeck.h
+handkarten.o: handkarten.c handkarten.h kartendeck.h main.h
 ende.o: ende.c ende.h menue.h
 
 all: clean $(Programm) run
