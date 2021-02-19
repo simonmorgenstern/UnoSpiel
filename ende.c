@@ -9,23 +9,24 @@ int spiel_ende_benachrichtigung(){
 		int r = rand() % 4;     // Zufällige Zahl zwischen 0 und 3 (4 Möglichkeiten)
 		switch(r){
 			case 0:
-				printf("Mal verliert man, mal gewinnt ein anderer ;-)\n");
+				printf("Mal verliert man, mal gewinnt ein anderer ;-)\n\n");
 				break;
 			case 1:
-				printf("Zweiter zu sein bedeutet Erster der Verlierer zu sein.\n");
+				printf("Zweiter zu sein bedeutet Erster der Verlierer zu sein.\n\n");
 				break;
 			case 2:
-				printf("Man ist niemals ein Verlierer - bis man aufgibt.\n");
+				printf("Man ist niemals ein Verlierer - bis man aufgibt.\n\n");
 				break;
 			case 3:
-				printf("Aus Niederlagen lernt man leicht. Schwieriger ist es, aus Siegen zu lernen.\n");
+				printf("Aus Niederlagen lernt man leicht. Schwieriger ist es, aus Siegen zu lernen.\n\n");
 				break;
 			default:
-				printf("Viel Glück beim nächsten Mal.\n");
+				printf("Viel Glück beim nächsten Mal.\n\n");
+				break;
 		}
 	}
 	else{
-		printf("Glückwunsch, du hast gewonnen ^-^ \n");
+		printf("Glückwunsch, du hast gewonnen ^-^ \n\n");
 	}
 	pause(3);
 	printf("Möchtest du noch einmal spielen?\nWenn ja bestaetige mit y oder n.\nOder willst du wieder ins Menue? -> m\n");

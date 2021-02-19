@@ -172,7 +172,7 @@ void mischen() {
         int j = rand() % (i+1);
         tausche_karten(&Kartenstapel[i], &Kartenstapel[j]);
     }
-    zeige_kartenstapel();
+    //zeige_kartenstapel();
 }
 
 
