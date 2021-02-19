@@ -34,5 +34,7 @@ char karten_uebersetzung_typ[6][18];
 void kopiere_karten();
 void mische_karten();
 void zeige_kartenstapel();
+void tausche_karten(Karte *a, Karte *b);
+void mischen();
 
 #endif

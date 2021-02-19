@@ -28,57 +28,55 @@ int main() {
 void spiel_schleife() {
     decke_auf();
     spielstatus = spiel;
-    while (spielstatus == spiel) {
+    do {
         switch(spieler_reihenfolge[aktueller_spieler]){
             case spieler:
-                printf("spieler ist dran \n");
+                printf("Du bist dran.");
                 spielroutine_spieler();
-                naechster_spieler(1);
+                //printf("DEBUG Spiel_schleife Ende Spielercase\n");
                 break;
             case bot1:
-                printf("Soeren ist dran \n");
-
+				//printf("DEBUG Spiel_schleife Soerencase\n");
+                printf("Soeren ist dran.\n");
                 spielroutine_bot(bot1);
                 pause(2);
                 break;
             case bot2:
-                printf("Brigitte ist dran \n");
-
+                printf("Brigitte ist dran.\n");
                 spielroutine_bot(bot2);
                 pause(2);
                 break;
             case bot3:
-                printf("Guenther ist dran \n");
-
+                printf("Guenther ist dran.\n");
                 spielroutine_bot(bot3);
                 pause(2);
                 break;
             default:
-                printf("kann spieler nicht finden");
+                printf("Kann spieler nicht finden.\n");
         }
         if(anzahl_karten_spieler == 0 || anzahl_karten_bot1 == 0 || anzahl_karten_bot2 == 0 || anzahl_karten_bot3 == 0){
             spielstatus = spielende;
             if (anzahl_karten_bot1 == 0){
-				printf("Soeren hat gewonnen.\n");
+				printf("Soeren hat gewonnen.\n\n");
 				pause(2);
 			}
 			if (anzahl_karten_bot2 == 0){
-				printf("Brigitte hat gewonnen.\n");
+				printf("Brigitte hat gewonnen.\n\n");
 				pause(2);	
 			}
 			if (anzahl_karten_bot3 == 0){
-				printf("Guenther hat gewonnen.\n");
+				printf("Guenther hat gewonnen.\n\n");
 				pause(2);	
 			}
         }
-    }
+    }while (spielstatus == spiel);
     //printf("Spiel Ende \n");
     // Spielende Funktion wird aufgerufen
     // Abfrage ob erneut gespielt werden soll
 }
 
 void init_spiel() {
-    mische_karten();
+    mischen();
     hole_handkarten_speicher();
     teile_karten_aus();
 }

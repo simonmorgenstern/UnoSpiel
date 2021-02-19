@@ -28,7 +28,7 @@ int spielstart() {
 //SL
 int menue(){
 	int menuepunkt = 0;
-	printf("------Menue------\n");
+	printf("\n------Menue------\n");
 	printf("1. Spiel starten\n");
 	printf("2. Regeln\n");
 	printf("3. Spielekommandos\n");

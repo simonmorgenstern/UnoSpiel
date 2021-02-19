@@ -2,11 +2,12 @@
 #define hand_karten_never_used
 
 #include <stdio.h>
-#include "kartendeck.h"
 #include <stdlib.h>
 #include <time.h>
-#include "main.h"
 #include <string.h>
+#include "kartendeck.h"
+#include "main.h"
+
 
 void hole_handkarten_speicher();
 void teile_karten_aus();
@@ -25,7 +26,6 @@ void wuensche_farbe_spieler();
 void spiele_karte(int wer, int index);
 void aendere_spielrichtung();
 void naechster_spieler(int schritte);
-
 Karte *p_handkarten_spieler;
 Karte *p_handkarten_bot1;
 Karte *p_handkarten_bot2;
