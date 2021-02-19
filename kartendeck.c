@@ -146,7 +146,7 @@ void decke_auf() {
 void zeige_kartenstapel() {
 	for(int i = 0; i < 108; i++){
 	    Karte k = Kartenstapel[i];
-        printf("Stapelkarte %d -> Typ: %d, Farbe: %d, Nummer: %d\n \n",i, k.typ, k.farbe, k.nummer);
+        printf("%-5d -> %-7s  %-7d  %s\n", i, karten_uebersetzung_farbe[k.farbe], k.nummer, karten_uebersetzung_typ[k.typ]);
 	}
 }
 
@@ -157,6 +157,23 @@ char karten_uebersetzung_farbe[5][8]={
 char karten_uebersetzung_typ[6][18]={
 	"zahl", "plus2", "plus4", "aussetzen", "richtungswechsel", "farbwunsch"
 };
+
+void tausche_karten(Karte *a, Karte *b) {
+    Karte temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void mischen() {
+    kopiere_karten();
+    srand(time(NULL));
+    int i;
+    for(i = 108-1; i > 0; i--) {
+        int j = rand() % (i+1);
+        tausche_karten(&Kartenstapel[i], &Kartenstapel[j]);
+    }
+    zeige_kartenstapel();
+}
 
 
 

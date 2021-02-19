@@ -25,7 +25,6 @@ void wuensche_farbe_spieler();
 void spiele_karte(int wer, int index);
 void aendere_spielrichtung();
 void naechster_spieler(int schritte);
-
 Karte *p_handkarten_spieler;
 Karte *p_handkarten_bot1;
 Karte *p_handkarten_bot2;

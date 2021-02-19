@@ -76,7 +76,7 @@ void spiel_schleife() {
 }
 
 void init_spiel() {
-    mische_karten();
+    mischen();
     hole_handkarten_speicher();
     teile_karten_aus();
 }
@@ -84,7 +84,7 @@ void init_spiel() {
 // Linux 1000000 | Windoof 1000
 void pause(int nummer_sekunden)
 {
-    int millisekunden = 1000000 * nummer_sekunden;
+    int millisekunden = 1000 * nummer_sekunden;
     clock_t start_zeit = clock();
     while (clock() < start_zeit + millisekunden);
 }
