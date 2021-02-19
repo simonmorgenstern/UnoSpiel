@@ -7,7 +7,13 @@ void fehlermeldung(){
 // SL
 int spielstart() {
     char spiel_start;
-    printf("\nHallo, willst du UNO spielen?\n");
+    printf("\nUUUU   UUUU  NNN   NNN    OOOOOOO \n");
+    printf("UUUU   UUUU  NNNN  NNN   OOOOOOOOO \n");
+    printf("UUUU   UUUU  NNNNN NNN  OOOO   OOOO\n");
+    printf("UUUU   UUUU  NNN NNNNN  OOOO   OOOO\n");
+    printf(" UUUUUUUUU   NNN  NNNN   OOOOOOOOO \n");
+    printf("  UUUUUUU    NNN   NNN    OOOOOOO \n");
+    printf("\nHallo, willst du spielen?\n");
     printf("Bestaetige mit y oder verneine mit n\n");
     do{
         spiel_start = getchar();
