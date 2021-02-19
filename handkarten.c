@@ -296,7 +296,7 @@ int gib_funktion(char *zweite_eingabe,
 void spielroutine_bot(int wer) {
     int *moegliche_karten = (int *) calloc(1, sizeof(int));
     if (moegliche_karten == NULL) {
-        printf("Speicheranforderung fehlgeschlagen");
+        printf("Speicheranforderung fehlgeschlagen spielroutine_bot\n");
     }
 
     int anzahl_moegliche_karten = 0;
@@ -388,7 +388,7 @@ void suche_moegliche_karten(Karte *handkarten, int karten_anzahl, int *moegliche
             *anzahl_moegliche_karten = *anzahl_moegliche_karten + 1;
             moegliche_karten = realloc(moegliche_karten, (*anzahl_moegliche_karten * sizeof(int)));
             if(moegliche_karten == NULL) {
-                printf("fehler in der suche moeglich karten");
+                printf("Fehler in der suche_moeglich_karten");
             }
             moegliche_karten[*anzahl_moegliche_karten - 1] = i;
         }
@@ -520,7 +520,15 @@ void spiele_karte(int wer, int index) {
             }
             printf("Soeren hat folgende Karte gelegt: %s %s %d \n", karten_uebersetzung_farbe[p_handkarten_bot1[index].farbe], karten_uebersetzung_typ[p_handkarten_bot1[index].typ], p_handkarten_bot1[index].nummer);
             entferne_karte(bot1, index);
-            printf("Soeren hat noch %d Karte(n).\n\n", anzahl_karten_bot1);  //Kartenzahl des Bots anzeigen lassen
+            if(anzahl_karten_bot1 == 1){
+				printf("Soeren sagt UNO.\n\n");
+			}
+			if (anzahl_karten_bot1 == 0){
+				printf("Soeren sagt UNO UNO.\n\n");
+			}
+			else{	
+				printf("Soeren hat noch %d Karte(n).\n\n", anzahl_karten_bot1);
+			}
             break;
         case bot2:
             letzte_karte = p_handkarten_bot2[index];
@@ -538,7 +546,15 @@ void spiele_karte(int wer, int index) {
             }
             printf("Brigitte hat folgende Karte gelegt: %s %s %d \n", karten_uebersetzung_farbe[p_handkarten_bot2[index].farbe], karten_uebersetzung_typ[p_handkarten_bot2[index].typ], p_handkarten_bot2[index].nummer);
             entferne_karte(bot2, index);
-            printf("Brigitte hat noch %d Karte(n).\n\n", anzahl_karten_bot2);
+            if(anzahl_karten_bot2 == 1){
+				printf("Brigitte sagt UNO.\n\n");
+			}
+			if (anzahl_karten_bot2 == 0){
+				printf("Brigitte sagt UNO UNO.\n\n");
+			}
+			else{
+				printf("Brigitte hat noch %d Karte(n).\n\n", anzahl_karten_bot2);
+			}
             break;
         case bot3:
             letzte_karte = p_handkarten_bot3[index];
@@ -556,7 +572,15 @@ void spiele_karte(int wer, int index) {
             }
             printf("Guenther hat folgende Karte gelegt: %s %s %d \n", karten_uebersetzung_farbe[p_handkarten_bot3[index].farbe], karten_uebersetzung_typ[p_handkarten_bot3[index].typ], p_handkarten_bot3[index].nummer);
             entferne_karte(bot3, index);
-            printf("Guenther hat noch %d Karte(n).\n\n", anzahl_karten_bot3);
+            if(anzahl_karten_bot3 == 1){
+				printf("Guenther sagt UNO.\n\n");
+			}
+			if (anzahl_karten_bot3 == 0){
+				printf("Guenther sagt UNO UNO.\n\n");
+			}
+			else{
+				printf("Guenther hat noch %d Karte(n).\n\n", anzahl_karten_bot3);
+			}
             break;
         case spieler:
             letzte_karte = p_handkarten_spieler[index];

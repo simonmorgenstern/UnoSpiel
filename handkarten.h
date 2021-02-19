@@ -2,11 +2,12 @@
 #define hand_karten_never_used
 
 #include <stdio.h>
-#include "kartendeck.h"
 #include <stdlib.h>
 #include <time.h>
-#include "main.h"
 #include <string.h>
+#include "kartendeck.h"
+#include "main.h"
+
 
 void hole_handkarten_speicher();
 void teile_karten_aus();
