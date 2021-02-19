@@ -5,7 +5,7 @@
 #include "ende.h"                    //eingefügt
 
 
-
+int bot = 0;
 
 // Statusvariablen Spiel
 
@@ -21,11 +21,10 @@ int main() {
             spiel_schleife();
         } while (spiel_ende_benachrichtigung() == 1);
     }
-
     return 0;
 }
 
-void spiel_schleife() {
+int spiel_schleife() {
     decke_auf();
     spielstatus = spiel;
     do {
@@ -59,17 +58,21 @@ void spiel_schleife() {
             if (anzahl_karten_bot1 == 0){
 				printf("Soeren hat gewonnen.\n\n");
 				pause(2);
+				bot = 1;
 			}
 			if (anzahl_karten_bot2 == 0){
 				printf("Brigitte hat gewonnen.\n\n");
-				pause(2);	
+				pause(2);
+				bot = 1;	
 			}
 			if (anzahl_karten_bot3 == 0){
 				printf("Guenther hat gewonnen.\n\n");
-				pause(2);	
+				pause(2);
+				bot = 1;	
 			}
         }
     }while (spielstatus == spiel);
+    return bot;
     //printf("Spiel Ende \n");
     // Spielende Funktion wird aufgerufen
     // Abfrage ob erneut gespielt werden soll

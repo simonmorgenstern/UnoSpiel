@@ -7,5 +7,5 @@
 #include "main.h"
 //SL
 int spiel_ende_benachrichtigung();
-
+int menue();
 #endif

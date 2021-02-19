@@ -3,7 +3,6 @@
 //SL
 int spiel_ende_benachrichtigung(){
 	char spiel_fortsetzen;
-	int bot = 1;				//Variable wer gewonnen hat, kann/muss noch angepasst werden
 	if (bot == 1){
 		srand(time(NULL));
 		int r = rand() % 4;     // Zufällige Zahl zwischen 0 und 3 (4 Möglichkeiten)
@@ -34,7 +33,8 @@ int spiel_ende_benachrichtigung(){
 	while(getchar() != '\n');
 	switch(spiel_fortsetzen){
 		case 'y':
-			return 1;					//korrigiert, war spiel()
+			return 1;
+			main();					//korrigiert, war spiel()
 			break;
 		case 'n':
 			printf("Schade, bis zum naechsten Mal.\n");

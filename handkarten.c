@@ -11,23 +11,23 @@ int zieh_counter = 0;
 void hole_handkarten_speicher() {
     p_handkarten_spieler = calloc(7, sizeof(Karte));
     if (p_handkarten_spieler == NULL) {
-        printf("Speicheranforderung fehlgeschlagen\n");
+        printf("Speicheranforderung fehlgeschlagen bei hole_handkarten_speicher\n");
     }
     p_handkarten_bot1 = calloc(7, sizeof(Karte));
     if (p_handkarten_bot1 == NULL) {
-        printf("Speicheranforderung fehlgeschlagen\n");
+        printf("Speicheranforderung fehlgeschlagen bei hole_handkarten_speicher\n");
     }
     p_handkarten_bot2 = calloc(7, sizeof(Karte));
     if (p_handkarten_bot2 == NULL) {
-        printf("Speicheranforderung fehlgeschlagen\n");
+        printf("Speicheranforderung fehlgeschlagen bei hole_handkarten_speicher\n");
     }
     p_handkarten_bot3 = calloc(7, sizeof(Karte));
     if (p_handkarten_bot3 == NULL) {
-        printf("Speicheranforderung fehlgeschlagen\n");
+        printf("Speicheranforderung fehlgeschlagen bei hole_handkarten_speicher\n");
     }
 }
 
-// SM
+// SM SL
 void teile_karten_aus() {
     for (int karte = 0; karte < 7; karte++) {
         for (int spieler_counter = 0; spieler_counter < 4; spieler_counter++) {
@@ -297,16 +297,15 @@ int gib_funktion(char *zweite_eingabe,
     *ist_karte_nummer = 1;
     return karten_zahl;
 }
-
+// SM SL
 void spielroutine_bot(int wer) {
     int *moegliche_karten = (int *) calloc(1, sizeof(int));
     if (moegliche_karten == NULL) {
-        printf("Speicheranforderung fehlgeschlagen");
+        printf("Speicheranforderung fehlgeschlagen bei spielroutine_bot\n");
     }
     int anzahl_moegliche_karten = 0;
     switch (wer) {
         case bot1:
-            printf("Soeren hat noch %d Karte(n).\n", anzahl_karten_bot1);  //Kartenzahl des Bots anzeigen lassen
             pause(2);
             anzahl_moegliche_karten = 0;
             suche_moegliche_karten(p_handkarten_bot1, anzahl_karten_bot1, moegliche_karten, &anzahl_moegliche_karten);
@@ -322,7 +321,7 @@ void spielroutine_bot(int wer) {
                 spiele_karte(bot1, karten_index);
             } else {
                 if (zieh_counter > 0) {
-                    printf("Soeren muss %d Karten abheben.\n", zieh_counter);
+                    printf("Soeren muss %d Karten abheben.\n\n", zieh_counter);
                     ziehe_karten(bot1, zieh_counter);
                     zieh_counter = 0;
                 } else {
@@ -333,7 +332,6 @@ void spielroutine_bot(int wer) {
             }
             break;
         case bot2:
-            printf("Brigitte hat noch %d Karte(n).\n", anzahl_karten_bot2);
             pause(2);
             anzahl_moegliche_karten = 0;
             suche_moegliche_karten(p_handkarten_bot2, anzahl_karten_bot2, moegliche_karten, &anzahl_moegliche_karten);
@@ -349,7 +347,7 @@ void spielroutine_bot(int wer) {
                 spiele_karte(bot2, karten_index);
             } else {
                 if (zieh_counter > 0) {
-                    printf("Brigitte muss %d Karten abheben.\n", zieh_counter);
+                    printf("Brigitte muss %d Karten abheben.\n\n", zieh_counter);
                     ziehe_karten(bot2, zieh_counter);
                     zieh_counter = 0;
                 } else {
@@ -360,7 +358,6 @@ void spielroutine_bot(int wer) {
             }
             break;
         case bot3:
-            printf("Guenther hat noch %d Karte(n).\n", anzahl_karten_bot3);
             pause(2);
             anzahl_moegliche_karten = 0;
             suche_moegliche_karten(p_handkarten_bot3, anzahl_karten_bot3, moegliche_karten, &anzahl_moegliche_karten);
@@ -396,7 +393,7 @@ void suche_moegliche_karten(Karte *handkarten, int karten_anzahl, int *moegliche
             *anzahl_moegliche_karten = *anzahl_moegliche_karten + 1;
             moegliche_karten = realloc(moegliche_karten, (*anzahl_moegliche_karten * sizeof(int)));
             if (moegliche_karten == NULL) {
-                printf("fehler in der suche moeglich karten");
+                printf("Fehler in der suche_moeglich_karten\n");
             }
             moegliche_karten[*anzahl_moegliche_karten - 1] = i;
         }
@@ -526,11 +523,19 @@ void spiele_karte(int wer, int index) {
                     aendere_spielrichtung();
                     break;
             }
-            printf("Soeren hat folgende Karte gelegt: %s %s %d \n\n",
+            printf("Soeren hat folgende Karte gelegt: %s %s %d \n",
                    karten_uebersetzung_farbe[p_handkarten_bot1[index].farbe],
                    karten_uebersetzung_typ[p_handkarten_bot1[index].typ], p_handkarten_bot1[index].nummer);
             entferne_karte(bot1, index);
-            printf("Soeren hat noch %d Karte(n).\n\n", anzahl_karten_bot1);  //Kartenzahl des Bots anzeigen lassen
+            if(anzahl_karten_bot1 == 1){
+				printf("Soeren sagt UNO.\n\n");
+			}
+			else if (anzahl_karten_bot1 == 0){
+				printf("Soeren sagt UNO UNO.\n\n");
+			}
+			else{	
+				printf("Soeren hat noch %d Karte(n).\n\n", anzahl_karten_bot1);
+			}
             break;
         case bot2:
             letzte_karte = p_handkarten_bot2[index];
@@ -546,11 +551,19 @@ void spiele_karte(int wer, int index) {
                     aendere_spielrichtung();
                     break;
             }
-            printf("Brigitte hat folgende Karte gelegt: %s %s %d \n\n",
+            printf("Brigitte hat folgende Karte gelegt: %s %s %d \n",
                    karten_uebersetzung_farbe[p_handkarten_bot2[index].farbe],
                    karten_uebersetzung_typ[p_handkarten_bot2[index].typ], p_handkarten_bot2[index].nummer);
             entferne_karte(bot2, index);
-            printf("Brigitte hat noch %d Karte(n).\n\n", anzahl_karten_bot2);
+            if(anzahl_karten_bot2 == 1){
+				printf("Brigitte sagt UNO.\n\n");
+			}
+			else if (anzahl_karten_bot2 == 0){
+				printf("Brigitte sagt UNO UNO.\n\n");
+			}
+			else{
+				printf("Brigitte hat noch %d Karte(n).\n\n", anzahl_karten_bot2);
+			}
             break;
         case bot3:
             letzte_karte = p_handkarten_bot3[index];
@@ -566,11 +579,19 @@ void spiele_karte(int wer, int index) {
                     aendere_spielrichtung();
                     break;
             }
-            printf("Guenther hat folgende Karte gelegt: %s %s %d \n\n",
+            printf("Guenther hat folgende Karte gelegt: %s %s %d \n",
                    karten_uebersetzung_farbe[p_handkarten_bot3[index].farbe],
                    karten_uebersetzung_typ[p_handkarten_bot3[index].typ], p_handkarten_bot3[index].nummer);
             entferne_karte(bot3, index);
-            printf("Guenther hat noch %d Karte(n).\n\n", anzahl_karten_bot3);
+            if(anzahl_karten_bot3 == 1){
+				printf("Guenther sagt UNO.\n\n");
+			}
+			else if (anzahl_karten_bot3 == 0){
+				printf("Guenther sagt UNO UNO.\n\n");
+			}
+			else{
+				printf("Guenther hat noch %d Karte(n).\n\n", anzahl_karten_bot3);
+			}
             break;
         case spieler:
             letzte_karte = p_handkarten_spieler[index];
@@ -597,8 +618,8 @@ void spiele_karte(int wer, int index) {
             break;
     }
     if (letzte_karte.typ == aussetzen) {
-        if (aktueller_spieler != spieler) {
-            printf("%c muss wohl leider aussetzen.\n\n", aktueller_spieler);
+        if ((aktueller_spieler + 1) != spieler) {
+            printf("Bot muss wohl leider aussetzen.\n\n");
         } else {
             printf("Du musst wohl leider aussetzen.\n\n");
         }
@@ -610,7 +631,7 @@ void spiele_karte(int wer, int index) {
 
 void wuensche_farbe(int farbe) {
     wunschfarbe = farbe;
-    printf("Die Farbe %d wurde gewuenscht.\n", wunschfarbe);
+    printf("Die Farbe %s wurde gewuenscht.\n", karten_uebersetzung_farbe[farbe]);
 }
 
 void wuensche_farbe_spieler() {
@@ -619,6 +640,7 @@ void wuensche_farbe_spieler() {
     printf("Bitte eine Farbe eingeben.\n");
     do {
         scanf("%s", &eingegebene_wunschfarbe);
+        printf("\n");
         gewuentschte_farbe = gib_farbe(&eingegebene_wunschfarbe);
         wuensche_farbe(gewuentschte_farbe);
     } while (gewuentschte_farbe == 404 || gewuentschte_farbe == schwarz);
@@ -639,8 +661,3 @@ void naechster_spieler(int schritte) {
         aktueller_spieler = (4 + aktueller_spieler - schritte) % 4;
     }
 }
-
-
-
-
-
