@@ -138,6 +138,7 @@ void kopiere_karten() {
 void decke_auf() {
     letzte_karte = Kartenstapel[oberste_stapel_karte];
     Kartenstapel[oberste_stapel_karte].status = abgelegt;
+    printf("Erste Karte wird aufgedeckt %s %s %d\n", karten_uebersetzung_farbe[Kartenstapel[oberste_stapel_karte].farbe],karten_uebersetzung_typ[Kartenstapel[oberste_stapel_karte].typ], Kartenstapel[oberste_stapel_karte].nummer);
     oberste_stapel_karte++;
 }
 

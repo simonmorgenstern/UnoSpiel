@@ -54,17 +54,24 @@ void teile_karten_aus() {
         }
     }
     printf("Der Gamemaster teilt die Karten aus.\n");
-    pause(3);
+	printf(".\n");
+	pause(1);
+	printf("..\n");
+	pause(1);
+	printf("...\n");
+    pause(1);
     //zeige_handkarten_spieler();
 }
 
-// SM
+// SM SL
 void zeige_handkarten_spieler() {
-    printf("\nSpielerkarten: \n");
+    printf("\nDu hast folgende Karten auf deiner Hand: \n");
+    printf("Karte -> Farbe:   Nummer:  Typ: \n");
     for (int i = 0; i < anzahl_karten_spieler; i++) {					//verschönern!!!//SL, bessere Darstellung
 
         Karte k = p_handkarten_spieler[i];
-        printf("Spielerkarte %d -> Typ: %s, Farbe: %s, Nummer: %d\n \n", i, karten_uebersetzung_typ[k.typ], karten_uebersetzung_farbe[k.farbe], k.nummer);
+        int j = i+1;
+        printf("%-5d -> %-7s  %-7d  %s\n", j, karten_uebersetzung_farbe[k.farbe], k.nummer, karten_uebersetzung_typ[k.typ]);
     }
 }
 
@@ -72,7 +79,7 @@ void zeige_handkarten_spieler() {
 void ziehe_karten(int wer, int anzahl) {
     switch (wer) {
         case spieler:
-            printf("Du musst %d Karte(n) ziehen.\n", anzahl);
+            //printf("Du musst %d Karte(n) ziehen.\n", anzahl);
             p_handkarten_spieler = realloc(p_handkarten_spieler, (anzahl_karten_spieler + anzahl) * sizeof(Karte));
             if (p_handkarten_spieler == NULL) {
                 printf("Speicheranforderung fehlgeschlagen");
@@ -86,7 +93,7 @@ void ziehe_karten(int wer, int anzahl) {
 //            zeige_handkarten_spieler();
             break;
         case bot1:
-            printf("Soeren zieht %d Karte(n).\n", anzahl);
+            //printf("Soeren zieht %d Karte(n).\n", anzahl);
             p_handkarten_bot1 = realloc(p_handkarten_bot1, (anzahl_karten_bot1 + anzahl) * sizeof(Karte));
             if (p_handkarten_bot1 == NULL) {
                 printf("Speicheranforderung fehlgeschlagen");
@@ -99,7 +106,7 @@ void ziehe_karten(int wer, int anzahl) {
             anzahl_karten_bot1 = anzahl_karten_bot1 + anzahl;
             break;
         case bot2:
-            printf("Brigitte zieht %d Karte(n).\n", anzahl);
+            //printf("Brigitte zieht %d Karte(n).\n", anzahl);
             p_handkarten_bot2 = realloc(p_handkarten_bot2, (anzahl_karten_bot2 + anzahl) * sizeof(Karte));
             if (p_handkarten_bot2 == NULL) {
                 printf("Speicheranforderung fehlgeschlagen");
@@ -113,7 +120,7 @@ void ziehe_karten(int wer, int anzahl) {
             anzahl_karten_bot2 = anzahl_karten_bot2 + anzahl;
             break;
         case bot3:
-            printf("Guenther zieht %d Karte(n).\n", anzahl);
+            //printf("Guenther zieht %d Karte(n).\n", anzahl);
             p_handkarten_bot3 = realloc(p_handkarten_bot1, (anzahl_karten_bot3 + anzahl) * sizeof(Karte));
             if (p_handkarten_bot3 == NULL) {
                 printf("Speicheranforderung fehlgeschlagen");
@@ -195,6 +202,7 @@ void spielroutine_spieler(){
                 printf("Welche Karte willst du spielen?\n");
 				do {
 					scanf("%s %s", erste_eingabe, zweite_eingabe);
+					printf("\n");
 					int karten_funktion = gib_funktion(zweite_eingabe, &ist_karte_nummer);
 					int zwischenspeicher = gib_farbe(erste_eingabe);
 					for (int i = 0; i < anzahl_moegliche_karten; i++){
@@ -229,13 +237,13 @@ void spielroutine_spieler(){
             zieh_counter = 0;
         } else {
             ziehe_karten(spieler, 1);
-            printf("Du kannst nichts spielen, du ziehst eine Karte.\n");
+            printf("Du kannst nichts spielen, du ziehst eine Karte.\n\n");
             pause(2);
         }
         naechster_spieler(1);
     }
     free(moegliche_karten);
-    printf("ende spieler zug");
+   //printf("Ende Spieler Zug DEBUG\n");
 }
 
 int gib_farbe(char *erste_eingabe) {
@@ -296,7 +304,6 @@ void spielroutine_bot(int wer) {
         case bot1:
 			printf("Soeren hat noch %d Karte(n).\n", anzahl_karten_bot1);  //Kartenzahl des Bots anzeigen lassen
 			pause(2);
-
             suche_moegliche_karten(p_handkarten_bot1, anzahl_karten_bot1, moegliche_karten, &anzahl_moegliche_karten);
             if (anzahl_moegliche_karten > 0) {
                 // wähle random
@@ -511,7 +518,7 @@ void spiele_karte(int wer, int index) {
                     aendere_spielrichtung();
                     break;
             }
-            printf("Soeren hat folgende Karte gelegt: %s %s %d \n", karten_uebersetzung_farbe[p_handkarten_bot1[index].farbe], karten_uebersetzung_typ[p_handkarten_bot1[index].typ], p_handkarten_bot1[index].nummer);
+            printf("Soeren hat folgende Karte gelegt: %s %s %d \n\n", karten_uebersetzung_farbe[p_handkarten_bot1[index].farbe], karten_uebersetzung_typ[p_handkarten_bot1[index].typ], p_handkarten_bot1[index].nummer);
             entferne_karte(bot1, index);
             break;
         case bot2:
@@ -528,7 +535,7 @@ void spiele_karte(int wer, int index) {
                     aendere_spielrichtung();
                     break;
             }
-            printf("Brigitte hat folgende Karte gelegt: %s %s %d \n", karten_uebersetzung_farbe[p_handkarten_bot2[index].farbe], karten_uebersetzung_typ[p_handkarten_bot2[index].typ], p_handkarten_bot2[index].nummer);
+            printf("Brigitte hat folgende Karte gelegt: %s %s %d \n\n", karten_uebersetzung_farbe[p_handkarten_bot2[index].farbe], karten_uebersetzung_typ[p_handkarten_bot2[index].typ], p_handkarten_bot2[index].nummer);
             entferne_karte(bot2, index);
             break;
         case bot3:
@@ -545,7 +552,7 @@ void spiele_karte(int wer, int index) {
                     aendere_spielrichtung();
                     break;
             }
-            printf("Guenther hat folgende Karte gelegt: %s %s %d \n", karten_uebersetzung_farbe[p_handkarten_bot3[index].farbe], karten_uebersetzung_typ[p_handkarten_bot3[index].typ], p_handkarten_bot3[index].nummer);
+            printf("Guenther hat folgende Karte gelegt: %s %s %d \n\n", karten_uebersetzung_farbe[p_handkarten_bot3[index].farbe], karten_uebersetzung_typ[p_handkarten_bot3[index].typ], p_handkarten_bot3[index].nummer);
             entferne_karte(bot3, index);
             break;
         case spieler:
@@ -567,12 +574,13 @@ void spiele_karte(int wer, int index) {
                     break;
             }
             entferne_karte(spieler, index);
+            break;
         default:
             printf("Spieler wurde nicht gefunden.\n");
             break;
     }
     if(letzte_karte.typ == aussetzen){
-        printf("Du musst wohl leider aussetzen.\n");
+        printf("Du musst wohl leider aussetzen.\n\n");
         naechster_spieler(2);
     } else {
         naechster_spieler(1);
