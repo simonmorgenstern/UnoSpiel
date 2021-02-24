@@ -1,0 +1,55 @@
+Entwicklerdokumentation. 
+Das Projekt
+
+--Codierung der Uno Karten--
+Die Karten werden in einer Struktur Karte gespeichert. 
+Diese enthält den Index, Status (auf dem Stapel, abgelegt, in der Hand), Typ (plus2, aussetzen…), Nummer und Farbe der Karte. 
+Alle Karten werden in einer Liste aus Strukturen gespeichert so dass bei jedem Spielstart von einem „frischen Deck“ gemischt werden kann. 
+
+Alle Funktionen, die mit dem Kartenstapel zu tun haben, werden in der Datei kartendeck.c zusammengefasst. (speichern und mischen der Karten)
+
+
+--Implementierung der Handkarten--
+Die Handkarten werden in einem variabel großen Array aus Karten gespeichert. Hierfür wird die Methode calloc(…) und realloc(…) der stdlib.h verwendet. 
+
+In der Datei handkarten.c werden alle Funktionen zusammengefasst, welche mit den Handkarten arbeiten. Also austeilen der Karten, ziehen der Karten und entfernen der Karten aus dem Handkarten Array. 
+
+Um die Komplexität des Codes zu begrenzen erhält jeder Spielteilnehmer eine eigene Liste aus Handkarten sowie eine eigene Zählvariable für die Anzahl der Karten. 
+
+--Implementierung der Bots--
+Die Bots haben eine eigene Spielroutine, um halbwegs intelligente Züge durchführen zu können. 
+Zum Start prüft eine Methode welche Karten von den Handkarten des jeweiligen Bots gespielt werden können. Falls eine (oder mehrere) gespielt werden können wird eine zufällig ausgewählt. Ansonsten wird eine (oder mehrere) Karten gezogen. 
+Falls sich der Bot eine Karte wünschen darf wird gezählt von welcher Farbe er am meisten Karten hat und diese ausgewählt. 
+
+Da jeder Bot ein eigenes Array erhält doppelt sich der Code an einigen Stellen. 
+
+
+--Ablauf des Spiels--
+Es werden so lang Züge vollzogen, bis einer der Spieler gewonnen hat. (Falls alle Karten gezogen wurden kann nicht mehr gezogen werden). 
+
+Die Steuerung wird am Anfang unter einem Menüpunkt erklärt. 
+
+
+Anwenderdokumentation.
+--Spiel ausführen--
+Die kompletten Dateien von GitHub herunterladen und abspeichern.
+Das Spiel muss über das Makefile ausführbar gemacht werden.
+
+--Windows--
+Das makefile ausführen und das Programm mit der "main.exe" starten.
+
+
+--Linux--
+Ein Terminalfenster öffnen und an in den Ordner des gespeicherten Codes navigieren oder das Terminalfenster aus dem Ordner heraus direkt öffnen.
+Befehl "make all" eingeben und bestätigen. Uno startet dann automatisch.
+
+
+--Uno spielen--
+Im Menü können die Regeln, sowie die Spielkommandos angezeigt werden, falls gewünscht.
+Im Spielverlauf werden die einzelnen Züge der Bots (Soeren, Brigitte, Guenther) detailliert aufgelistet,
+um den Spielverlauf verständlich zu gestalten.
+Jede Karte wird mit dem Befehl "<farbe> <zahl>" gespielt.
+Hierfür einfach die zu spielende Karte mit "farbe leerzeichen zahl"
+bzw. "farbe leerzeichen funktion" aufrufen. Jede Eingabe muss mit Enter
+besteatigt werden.
+
